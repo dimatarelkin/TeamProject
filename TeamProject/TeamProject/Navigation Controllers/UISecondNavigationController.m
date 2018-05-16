@@ -31,11 +31,11 @@
     self.view.backgroundColor = [UIColor yellowColor];
     
     //bar button with timer
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Results"
-                                                                    style:UIBarButtonItemStyleDone
-                                                                   target:self
-                                                                   action:@selector(barButtonItemClick:)];
-    [self.navigationItem setRightBarButtonItem:rightButton];
+//    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Results"
+//                                                                    style:UIBarButtonItemStyleDone
+//                                                                   target:self
+//                                                                   action:@selector(barButtonItemClick:)];
+//    [self.navigationItem setRightBarButtonItem:rightButton];
     
     
     
