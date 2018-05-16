@@ -8,6 +8,9 @@
 
 #import "UISecondNavigationController.h"
 #import "UIThirdNavigationController.h"
+#import "Game.h"
+#import "Gun.h"
+#import "Human.h"
 
 @interface UISecondNavigationController ()
 
@@ -22,16 +25,30 @@
     self.title = @"Game";
     self.view.backgroundColor = [UIColor yellowColor];
     
-
-    //add subView
-    
-    
     //bar button with timer
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Results"
                                                                     style:UIBarButtonItemStyleDone
                                                                    target:self
                                                                    action:@selector(barButtonItemClick:)];
     [self.navigationItem setRightBarButtonItem:rightButton];
+    
+    
+    
+    //start game
+    Game* game = [[Game alloc] init];
+    [game startGame];
+    
+    //adding gun
+    Gun* gun = [[Gun alloc] initWithFrame:CGRectMake(40, 600, 100, 100)];
+    gun.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:gun];
+    
+    //adding human
+    Human* human = [[Human alloc] initWithFrame:CGRectMake(300, 100, 100, 100)];
+    human.backgroundColor = [UIColor redColor];
+    [self.view addSubview:human];
+    
+   
 }
 
 - (void)barButtonItemClick:(id)sender {
@@ -49,28 +66,28 @@
 // MARK: - Step 2
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSLog(@"NAV2 | viewWillAppear");
+//    NSLog(@"NAV2 | viewWillAppear");
 }
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-    NSLog(@"NAV2 | viewWillLayoutSubviews");
+//    NSLog(@"NAV2 | viewWillLayoutSubviews");
 }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    NSLog(@"NAV2 | viewDidLayoutSubviews");
+//    NSLog(@"NAV2 | viewDidLayoutSubviews");
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    NSLog(@"NAV2 | viewDidAppear");
+//    NSLog(@"NAV2 | viewDidAppear");
 }
 // MARK: - Step 3
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    NSLog(@"NAV2 | viewWillDisappear");
+//    NSLog(@"NAV2 | viewWillDisappear");
 }
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-    NSLog(@"NAV2 | viewDidDisappear");
+//    NSLog(@"NAV2 | viewDidDisappear");
 }
 - (void)dealloc {
     NSLog(@"NAV2 | dealloc");

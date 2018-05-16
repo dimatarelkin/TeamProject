@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,10 @@
 		3216B24820AB76A0000965B8 /* UIFirstNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B24720AB76A0000965B8 /* UIFirstNavigationController.m */; };
 		3216B24B20AB76CB000965B8 /* UISecondNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B24A20AB76CB000965B8 /* UISecondNavigationController.m */; };
 		3216B24E20AB76FD000965B8 /* UIThirdNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B24D20AB76FD000965B8 /* UIThirdNavigationController.m */; };
+		3216B25220AC2A88000965B8 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25120AC2A88000965B8 /* Game.m */; };
+		3216B25520AC3D11000965B8 /* Gun.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25420AC3D11000965B8 /* Gun.m */; };
+		3216B25820AC3D91000965B8 /* Human.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25720AC3D91000965B8 /* Human.m */; };
+		3216B25B20AC3DA5000965B8 /* Shot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25A20AC3DA5000965B8 /* Shot.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +36,14 @@
 		3216B24A20AB76CB000965B8 /* UISecondNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UISecondNavigationController.m; sourceTree = "<group>"; };
 		3216B24C20AB76FD000965B8 /* UIThirdNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIThirdNavigationController.h; sourceTree = "<group>"; };
 		3216B24D20AB76FD000965B8 /* UIThirdNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIThirdNavigationController.m; sourceTree = "<group>"; };
+		3216B25020AC2A88000965B8 /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		3216B25120AC2A88000965B8 /* Game.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
+		3216B25320AC3D11000965B8 /* Gun.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gun.h; sourceTree = "<group>"; };
+		3216B25420AC3D11000965B8 /* Gun.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Gun.m; sourceTree = "<group>"; };
+		3216B25620AC3D91000965B8 /* Human.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Human.h; sourceTree = "<group>"; };
+		3216B25720AC3D91000965B8 /* Human.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Human.m; sourceTree = "<group>"; };
+		3216B25920AC3DA5000965B8 /* Shot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shot.h; sourceTree = "<group>"; };
+		3216B25A20AC3DA5000965B8 /* Shot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Shot.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +76,8 @@
 		3216B22F20AB757F000965B8 /* TeamProject */ = {
 			isa = PBXGroup;
 			children = (
+				3216B25D20AC3E13000965B8 /* Game */,
+				3216B25C20AC3DFC000965B8 /* Views */,
 				3216B24F20AB770D000965B8 /* Navigation Controllers */,
 				3216B23020AB757F000965B8 /* AppDelegate.h */,
 				3216B23120AB7580000965B8 /* AppDelegate.m */,
@@ -87,6 +101,28 @@
 				3216B24D20AB76FD000965B8 /* UIThirdNavigationController.m */,
 			);
 			path = "Navigation Controllers";
+			sourceTree = "<group>";
+		};
+		3216B25C20AC3DFC000965B8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				3216B25320AC3D11000965B8 /* Gun.h */,
+				3216B25420AC3D11000965B8 /* Gun.m */,
+				3216B25620AC3D91000965B8 /* Human.h */,
+				3216B25720AC3D91000965B8 /* Human.m */,
+				3216B25920AC3DA5000965B8 /* Shot.h */,
+				3216B25A20AC3DA5000965B8 /* Shot.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		3216B25D20AC3E13000965B8 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				3216B25020AC2A88000965B8 /* Game.h */,
+				3216B25120AC2A88000965B8 /* Game.m */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,11 +156,12 @@
 				TargetAttributes = {
 					3216B22C20AB757F000965B8 = {
 						CreatedOnToolsVersion = 9.3.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 3216B22820AB757F000965B8 /* Build configuration list for PBXProject "TeamProject" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -162,6 +199,10 @@
 				3216B24020AB7581000965B8 /* main.m in Sources */,
 				3216B24820AB76A0000965B8 /* UIFirstNavigationController.m in Sources */,
 				3216B24E20AB76FD000965B8 /* UIThirdNavigationController.m in Sources */,
+				3216B25820AC3D91000965B8 /* Human.m in Sources */,
+				3216B25B20AC3DA5000965B8 /* Shot.m in Sources */,
+				3216B25220AC2A88000965B8 /* Game.m in Sources */,
+				3216B25520AC3D11000965B8 /* Gun.m in Sources */,
 				3216B23220AB7580000965B8 /* AppDelegate.m in Sources */,
 				3216B24B20AB76CB000965B8 /* UISecondNavigationController.m in Sources */,
 			);
@@ -307,10 +348,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29ALX3W56Z;
 				INFOPLIST_FILE = TeamProject/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dimadimapractice.TeamProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -325,10 +363,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 29ALX3W56Z;
 				INFOPLIST_FILE = TeamProject/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dimadimapractice.TeamProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
