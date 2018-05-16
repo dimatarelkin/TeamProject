@@ -14,9 +14,11 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing the gun
     
+    
 }
 
 - (void)dealloc {
     NSLog(@"gun deallocated");
+    [super dealloc];
 }
 @end

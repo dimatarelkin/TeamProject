@@ -30,12 +30,12 @@
     self.title = @"Game";
     self.view.backgroundColor = [UIColor yellowColor];
     
-    //bar button with timer
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithTitle:@"Results"
+//    //bar button with timer
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Exit"
                                                                     style:UIBarButtonItemStyleDone
                                                                    target:self
                                                                    action:@selector(barButtonItemClick:)];
-    [self.navigationItem setRightBarButtonItem:rightButton];
+    [self.navigationItem setLeftBarButtonItem:leftButton];
     
     
     
@@ -64,6 +64,7 @@
     seconds = 5;
     _timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 100, 150, 50)];
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+    [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:20]];
     _timerLabel.backgroundColor = [UIColor clearColor];
     _timerLabel.textColor = [UIColor blackColor];
     [_timerLabel setTextAlignment:NSTextAlignmentCenter];
@@ -73,11 +74,9 @@
 }
 
 - (void)barButtonItemClick:(id)sender {
-    UIThirdNavigationController *tvc = [[UIThirdNavigationController alloc] init];
-    [self.navigationController pushViewController:tvc animated:true];
-    
-    [tvc release];
-
+   
+    [self.navigationController popToRootViewControllerAnimated:YES];
+    [timer invalidate];
 }
 
 - (void)timerEnds {
@@ -86,12 +85,16 @@
         NSLog(@"Timer ends");
         [timer invalidate];
         NSLog(@"Timer invalidated");
-        [self barButtonItemClick:nil];
+        
+        UIThirdNavigationController *tvc = [[UIThirdNavigationController alloc] init];
+        [self.navigationController pushViewController:tvc animated:true];
+        
+        [timer invalidate];
+        [tvc release];
 
     } else {
         seconds -=1;
         _timerLabel.text = [NSString stringWithFormat:@"Time: %d", seconds];
-        
         NSLog(@"minus 1 sec");
     }
    
@@ -101,6 +104,15 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    //timer
+    seconds = 5;
+    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                             target:self
+                                           selector:@selector(timerEnds)
+                                           userInfo:nil
+                                            repeats:YES];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -114,15 +126,6 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    //timer
-    seconds = 5;
-    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                             target:self
-                                           selector:@selector(timerEnds)
-                                           userInfo:nil
-                                            repeats:YES];
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -131,6 +134,8 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+
+    
 }
 
 - (void)dealloc {

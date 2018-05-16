@@ -28,7 +28,6 @@
     [label setFont:[UIFont fontWithName:@"Helvetica" size:15]];
     [self.view addSubview: label];
     
-    [label release];
     
     //add subView
     
@@ -39,7 +38,13 @@
                                                                    target:self
                                                                    action:@selector(barButtonItemClick:)];
     [self.navigationItem setRightBarButtonItem:rightButton];
+    
+    
+    
+    //releasing objects
+    [label release];
     [rightButton release];
+    
 }
 
 
@@ -51,11 +56,6 @@
     [self.navigationController pushViewController:svc animated:true];
     [svc release];
 }
-
-
-
-
-
 
 
 
