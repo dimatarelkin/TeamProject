@@ -12,9 +12,14 @@
 #import "Gun.h"
 #import "Human.h"
 
-@interface UISecondNavigationController ()
-
+@interface UISecondNavigationController () {
+    int seconds;
+    NSTimer* timer;
+}
+@property (weak, nonatomic) UILabel* timerLabel;
 @end
+
+
 
 @implementation UISecondNavigationController
 
@@ -38,17 +43,33 @@
     Game* game = [[Game alloc] init];
     [game startGame];
     
+    [game autorelease];
+    
     //adding gun
     Gun* gun = [[Gun alloc] initWithFrame:CGRectMake(40, 600, 100, 100)];
     gun.backgroundColor = [UIColor blackColor];
     [self.view addSubview:gun];
+    
+    [gun  autorelease];
+    
     
     //adding human
     Human* human = [[Human alloc] initWithFrame:CGRectMake(300, 100, 100, 100)];
     human.backgroundColor = [UIColor redColor];
     [self.view addSubview:human];
     
-   
+    [human autorelease];
+    
+    //timer label
+    seconds = 5;
+    _timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 100, 150, 50)];
+    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+    _timerLabel.backgroundColor = [UIColor clearColor];
+    _timerLabel.textColor = [UIColor blackColor];
+    [_timerLabel setTextAlignment:NSTextAlignmentCenter];
+    [_timerLabel setAdjustsFontSizeToFitWidth:YES];
+    [self.view addSubview:_timerLabel];
+    
 }
 
 - (void)barButtonItemClick:(id)sender {
@@ -56,42 +77,68 @@
     [self.navigationController pushViewController:tvc animated:true];
     
     [tvc release];
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)timerEnds {
+    //timer ends and game ends also
+    if (seconds == 0) {
+        NSLog(@"Timer ends");
+        [timer invalidate];
+        NSLog(@"Timer invalidated");
+        [self barButtonItemClick:nil];
+
+    } else {
+        seconds -=1;
+        _timerLabel.text = [NSString stringWithFormat:@"Time: %d", seconds];
+        
+        NSLog(@"minus 1 sec");
+    }
+   
+    
 }
 
-// MARK: - Step 2
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    NSLog(@"NAV2 | viewWillAppear");
 }
+
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-//    NSLog(@"NAV2 | viewWillLayoutSubviews");
 }
+
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-//    NSLog(@"NAV2 | viewDidLayoutSubviews");
 }
+
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    NSLog(@"NAV2 | viewDidAppear");
+    //timer
+    seconds = 5;
+    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                             target:self
+                                           selector:@selector(timerEnds)
+                                           userInfo:nil
+                                            repeats:YES];
+    
 }
-// MARK: - Step 3
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-//    NSLog(@"NAV2 | viewWillDisappear");
 }
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-//    NSLog(@"NAV2 | viewDidDisappear");
 }
+
 - (void)dealloc {
     NSLog(@"NAV2 | dealloc");
     [super dealloc];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
 @end

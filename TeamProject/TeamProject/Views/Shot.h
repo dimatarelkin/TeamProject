@@ -16,4 +16,5 @@
 @property (assign, nonatomic) CGFloat startingSpeed;    // начальная скорость
 
 - (void)ballistics;
+
 @end

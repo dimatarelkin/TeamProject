@@ -9,35 +9,19 @@
 #import "Game.h"
 #import "Gun.h"
 #import "Human.h"
+#import "UIThirdNavigationController.h"
 
 @implementation Game
 
 #pragma mark - Game -
 
 - (void)startGame {
-    
-//gun
-
-    
-//Human
-    //[self setHuman:humanInit];
-    
-// timer
-    NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:60.0
-                                                      target:self
-                                                    selector:@selector(timerEnds)
-                                                    userInfo:nil
-                                                     repeats:NO];
 }
 
-#pragma mark - End Of Game -
-- (void)timerEnds {
-    //timer ends and game ends also
-    
-}
+
 
 - (void)dealloc {
-    
+    [super dealloc];
 }
 
 @end

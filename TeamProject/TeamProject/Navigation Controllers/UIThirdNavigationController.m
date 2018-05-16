@@ -38,40 +38,36 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-// MARK: - Step 2
+
+
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    NSLog(@"NAV3 | viewWillAppear");
 }
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
-//    NSLog(@"NAV3 | viewWillLayoutSubviews");
 }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-//    NSLog(@"NAV3 | viewDidLayoutSubviews");
 }
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-//    NSLog(@"NAV3 | viewDidAppear");
 }
-// MARK: - Step 3
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-//    NSLog(@"NAV3 | viewWillDisappear");
 }
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
-//    NSLog(@"NAV3 | viewDidDisappear");
 }
 - (void)dealloc {
     NSLog(@"NAV3 | dealloc");
     [super dealloc];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
 @end

@@ -10,6 +10,9 @@
 
 @implementation Shot
 
+- (void)ballistics {
+    
+}
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
