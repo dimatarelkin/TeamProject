@@ -14,11 +14,14 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing the gun
     
+    CGContextRef context = UIGraphicsGetCurrentContext();
     
 }
 
 - (void)dealloc {
     NSLog(@"gun deallocated");
     [super dealloc];
+    
+    
 }
 @end
