@@ -16,15 +16,17 @@
 @implementation Gun
 @synthesize whizbang = _whizbang;
 
+// я создал этот init и переопределял его специально для того,
+// чтобы создать whizbang. А сейчас он же и не нужен.
 
-- (id) initWithFrame:(CGRect)frame {
-    
-    // сюда пришел наш gunRect он теперь frame
-    // то есть в drawRect self.frame будет равне нашему frame = gunRect
-    
-    [super initWithFrame:frame];
-    return self;
-}
+//- (id) initWithFrame:(CGRect)frame {
+//
+//    // сюда пришел наш gunRect он теперь frame
+//    // то есть в drawRect self.frame будет равне нашему frame = gunRect
+//
+//    [super initWithFrame:frame];
+//    return self;
+//}
 
 
 - (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
