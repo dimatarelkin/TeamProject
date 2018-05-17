@@ -37,6 +37,8 @@
     self.view.backgroundColor = [UIColor yellowColor];
     
     //bar button with timer
+   
+    
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Exit"
                                                                     style:UIBarButtonItemStyleDone
                                                                    target:self
@@ -58,7 +60,7 @@
     //rects
     CGRect rectForTimer = CGRectMake(minX, minY, maxX, firstY);
     CGRect rectForHuman = CGRectMake(minX, firstY, maxX, secondY);
-    CGRect rectForGun = CGRectMake(minX, secondY, maxX, maxY);
+    CGRect rectForGun = CGRectMake(minX, secondY, maxX, maxY - secondY);
     
     
     //adding gun
@@ -117,7 +119,7 @@
 
     _timerLabel = [[UILabel alloc] initWithFrame:rect];
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-    [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:20]];
+    [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:40]];
     
     _timerLabel.backgroundColor = [UIColor whiteColor];
     
@@ -128,6 +130,8 @@
 }
 
 - (void)addHumanInRect:(CGRect)rect {
+    //тоже самое и с человеков от нашего рект будем делать отступы
+    
     Human* human = [[Human alloc] initWithFrame:rect];
     human.backgroundColor = [UIColor grayColor];
     
@@ -136,8 +140,11 @@
 }
 
 - (void)addGunInRect:(CGRect)rect {
-    //тут добавил рандомные координаты и появилась пушка
-    Gun* gun = [[Gun alloc] initWithFrame:CGRectMake(100, 450, 40, 40)];
+    
+    //сделал новый рект для пушки добавив отступы от rectForGun
+    CGRect gunRect = CGRectMake(rect.origin.x + 100, rect.origin.y + 100, 40, 40);
+    
+    Gun* gun = [[Gun alloc] initWithFrame:gunRect];
     gun.backgroundColor = [UIColor redColor];
     
     [self.view addSubview:gun];
@@ -165,6 +172,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
+    
 }
 
 - (void)dealloc {

@@ -18,8 +18,8 @@
         [self setCenter:CGPointMake(X, [UIScreen mainScreen].bounds.size.height - 100)];
     } completion:nil];
     
-    NSLog(@"x = %f, y = %f\n\n", [myTouch locationInView:myTouch.view].x, [myTouch locationInView:myTouch.view].y);
-    NSLog(@"x = %f, y = %f", self.frame.origin.x, self.frame.origin.y);
+//    NSLog(@"x = %f, y = %f\n\n", [myTouch locationInView:myTouch.view].x, [myTouch locationInView:myTouch.view].y);
+//    NSLog(@"x = %f, y = %f", self.frame.origin.x, self.frame.origin.y);
     
 }
 
@@ -40,6 +40,10 @@
 
 - (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
 
+- (void)dealloc {
+    NSLog(@"shot deallocated");
+    [super dealloc];
+}
 
 //- (void)drawRect:(CGRect)rect {
 //    // Drawing code
