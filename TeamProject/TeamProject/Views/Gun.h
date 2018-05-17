@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Shot.h"
+
 
 @interface Gun : UIView
+@property(retain, nonatomic, readonly) Shot *whizbang;
+
 
 @end

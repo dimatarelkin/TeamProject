@@ -60,8 +60,9 @@
     CGRect rectForHuman = CGRectMake(minX, firstY, maxX, secondY);
     CGRect rectForGun = CGRectMake(minX, secondY, maxX, maxY);
     
+    
     //adding gun
-    [self addGunInRect:rectForGun]; 
+    [self addGunInRect:rectForGun];
 
     //adding human
     [self addHumanInRect:rectForHuman];
@@ -135,8 +136,9 @@
 }
 
 - (void)addGunInRect:(CGRect)rect {
-    Gun* gun = [[Gun alloc] initWithFrame:rect];
-    gun.backgroundColor = [UIColor whiteColor];
+    //тут добавил рандомные координаты и появилась пушка
+    Gun* gun = [[Gun alloc] initWithFrame:CGRectMake(100, 450, 40, 40)];
+    gun.backgroundColor = [UIColor redColor];
     
     [self.view addSubview:gun];
     [gun  autorelease];
