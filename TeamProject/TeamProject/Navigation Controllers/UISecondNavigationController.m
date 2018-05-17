@@ -59,8 +59,8 @@
 
     //rects
     CGRect rectForTimer = CGRectMake(minX, minY, maxX, firstY);
-    CGRect rectForHuman = CGRectMake(minX, firstY, maxX, secondY);
-    CGRect rectForGun = CGRectMake(minX, secondY, maxX, maxY - secondY);
+    CGRect rectForHuman = CGRectMake(minX, firstY, maxX, secondY - 100);
+    CGRect rectForGun = CGRectMake(minX, secondY + firstY, maxX, maxY - secondY);
     
     
     //adding gun
