@@ -19,10 +19,9 @@
 @property (weak, nonatomic) UILabel* timerLabel;
 @property (weak, nonatomic) UIView * workingArea;
 
-- (void)calculateArea;
-- (void)addHuman;
-- (void)addGun;
-- (void)startTimer;
+- (void)addHumanInRect:(CGRect)rect;
+- (void)addGunInRect:(CGRect)rect;
+- (void)startTimerInRect:(CGRect)rect;
 
 @end
 
@@ -44,14 +43,29 @@
                                                                    action:@selector(barButtonItemClick:)];
     [self.navigationItem setLeftBarButtonItem:leftButton];
 
+    
+    //prepare rects for view
+    //coordinats
+    CGFloat minX = CGRectGetMinX(self.view.frame);
+    CGFloat minY = CGRectGetMinY(self.view.frame);
+    CGFloat maxX = CGRectGetMaxX(self.view.frame);
+    CGFloat maxY = CGRectGetMaxY(self.view.frame);
+    CGFloat firstY = CGRectGetHeight(self.view.frame) / 5;
+    CGFloat secondY = CGRectGetHeight(self.view.frame)/ 5 * 2;
+
+    //rects
+    CGRect rectForTimer = CGRectMake(minX, minY, maxX, firstY);
+    CGRect rectForHuman = CGRectMake(minX, firstY, maxX, secondY);
+    CGRect rectForGun = CGRectMake(minX, secondY, maxX, maxY);
+    
     //adding gun
-    [self addGun];
+    [self addGunInRect:rectForGun]; // black
 
     //adding human
-    [self addHuman];
+    [self addHumanInRect:rectForHuman]; //red
     
     //timer label
-    [self startTimer];
+    [self startTimerInRect:rectForTimer];
     
     
 }
@@ -95,28 +109,34 @@
                                             repeats:YES];
 }
 
-- (void)startTimer {
+- (void)startTimerInRect:(CGRect)rect {
     seconds = 5;
-    _timerLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 100, 150, 50)];
+    
+    
+    _timerLabel = [[UILabel alloc] initWithFrame:rect];
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
     [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:20]];
-    _timerLabel.backgroundColor = [UIColor clearColor];
+    
+    _timerLabel.backgroundColor = [UIColor whiteColor];
+    
     _timerLabel.textColor = [UIColor blackColor];
     [_timerLabel setTextAlignment:NSTextAlignmentCenter];
     [_timerLabel setAdjustsFontSizeToFitWidth:YES];
     [self.view addSubview:_timerLabel];
 }
 
-- (void)addHuman {
-    Human* human = [[Human alloc] initWithFrame:CGRectMake(300, 100, 100, 100)];
-    human.backgroundColor = [UIColor redColor];
+- (void)addHumanInRect:(CGRect)rect {
+    Human* human = [[Human alloc] initWithFrame:rect];
+    human.backgroundColor = [UIColor grayColor];
+    
     [self.view addSubview:human];
     [human autorelease];
 }
 
-- (void)addGun {
-    Gun* gun = [[Gun alloc] initWithFrame:CGRectMake(40, 600, 100, 100)];
-    gun.backgroundColor = [UIColor blackColor];
+- (void)addGunInRect:(CGRect)rect {
+    Gun* gun = [[Gun alloc] initWithFrame:rect];
+    gun.backgroundColor = [UIColor whiteColor];
+    
     [self.view addSubview:gun];
     [gun  autorelease];
 }
