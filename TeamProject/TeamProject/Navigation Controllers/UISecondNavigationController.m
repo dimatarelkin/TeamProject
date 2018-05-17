@@ -43,15 +43,17 @@
                                                                    action:@selector(barButtonItemClick:)];
     [self.navigationItem setLeftBarButtonItem:leftButton];
 
-    
+   
     //prepare rects for view
     //coordinats
-    CGFloat minX = CGRectGetMinX(self.view.frame);
-    CGFloat minY = CGRectGetMinY(self.view.frame);
+    CGRect navigationBarFrame = [[self.navigationController navigationBar] frame];
+    
+    CGFloat minX = CGRectGetMinX(navigationBarFrame);
+    CGFloat minY = CGRectGetMaxY(navigationBarFrame);
     CGFloat maxX = CGRectGetMaxX(self.view.frame);
     CGFloat maxY = CGRectGetMaxY(self.view.frame);
-    CGFloat firstY = CGRectGetHeight(self.view.frame) / 5;
-    CGFloat secondY = CGRectGetHeight(self.view.frame)/ 5 * 2;
+    CGFloat firstY = CGRectGetHeight(self.view.frame) / 12;
+    CGFloat secondY = CGRectGetHeight(self.view.frame)/ 5 * 2.5;
 
     //rects
     CGRect rectForTimer = CGRectMake(minX, minY, maxX, firstY);
@@ -59,10 +61,10 @@
     CGRect rectForGun = CGRectMake(minX, secondY, maxX, maxY);
     
     //adding gun
-    [self addGunInRect:rectForGun]; // black
+    [self addGunInRect:rectForGun]; 
 
     //adding human
-    [self addHumanInRect:rectForHuman]; //red
+    [self addHumanInRect:rectForHuman];
     
     //timer label
     [self startTimerInRect:rectForTimer];
@@ -111,8 +113,7 @@
 
 - (void)startTimerInRect:(CGRect)rect {
     seconds = 5;
-    
-    
+
     _timerLabel = [[UILabel alloc] initWithFrame:rect];
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
     [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:20]];

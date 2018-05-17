@@ -14,7 +14,7 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing the gun
     
-   
+    NSLog(@"%@",NSStringFromCGRect(self.frame));
     
     
 
