@@ -13,5 +13,4 @@
 @interface Gun : UIView
 @property(retain, nonatomic, readonly) Shot *whizbang;
 
-
 @end

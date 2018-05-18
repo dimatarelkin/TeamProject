@@ -17,7 +17,8 @@
     NSTimer* timer;
 }
 @property (weak, nonatomic) UILabel* timerLabel;
-@property (weak, nonatomic) UIView * workingArea;
+@property (weak, nonatomic) Gun* gunView;
+@property (weak, nonatomic) Human* humanView;
 
 - (void)addHumanInRect:(CGRect)rect;
 - (void)addGunInRect:(CGRect)rect;
@@ -141,14 +142,13 @@
 
 - (void)addGunInRect:(CGRect)rect {
     
-    //сделал новый рект для пушки добавив отступы от rectForGun
-    CGRect gunRect = CGRectMake(rect.origin.x + 100, rect.origin.y + 100, 40, 40);
+
+    _gunView = [[Gun alloc] initWithFrame:rect];
+
+    [self.view addSubview:_gunView];
     
-    Gun* gun = [[Gun alloc] initWithFrame:gunRect];
-    gun.backgroundColor = [UIColor redColor];
+    [_gunView  autorelease];
     
-    [self.view addSubview:gun];
-    [gun  autorelease];
 }
 
 
