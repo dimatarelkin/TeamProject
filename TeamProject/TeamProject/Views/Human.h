@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface Human : UIView
+@property (assign, nonatomic) CGRect drawHumanSpace;
 
 @end

@@ -50,9 +50,15 @@
     [super dealloc];
 }
 
-//- (void)drawRect:(CGRect)rect {
-//    // Drawing code
-//}
+- (void)drawRect:(CGRect)rect {
+    // Drawing code
+    self.backgroundColor = [UIColor clearColor];
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextAddEllipseInRect(context, rect);
+    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
+    CGContextDrawPath(context, kCGPathFillStroke);
+    
+}
 
 
 @end

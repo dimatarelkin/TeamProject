@@ -20,8 +20,8 @@
 @property (weak, nonatomic) Gun* gunView;
 @property (weak, nonatomic) Human* humanView;
 
-- (void)addHumanInRect:(CGRect)rect;
-- (void)addGunInRect:(CGRect)rect;
+- (void)addHumanInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace;
+- (void)addGunInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace;
 - (void)startTimerInRect:(CGRect)rect;
 
 @end
@@ -35,7 +35,7 @@
     NSLog(@"NAV2 | viewDidLoad");
     //title and background
     self.title = @"Game";
-    self.view.backgroundColor = [UIColor yellowColor];
+    self.view.backgroundColor = [UIColor orangeColor];
     
     //bar button with timer
    
@@ -55,20 +55,22 @@
     CGFloat minY = CGRectGetMaxY(navigationBarFrame);
     CGFloat maxX = CGRectGetMaxX(self.view.frame);
     CGFloat maxY = CGRectGetMaxY(self.view.frame);
-    CGFloat firstY = CGRectGetHeight(self.view.frame) / 12;
-    CGFloat secondY = CGRectGetHeight(self.view.frame)/ 5 * 2.5;
+    
+    CGFloat firstY = (maxY - minY) / 12 + minY;
+    CGFloat secondY = (maxY - firstY) / 2 + firstY;
 
     //rects
-    CGRect rectForTimer = CGRectMake(minX, minY, maxX, firstY);
-    CGRect rectForHuman = CGRectMake(minX, firstY, maxX, secondY - 100);
-    CGRect rectForGun = CGRectMake(minX, secondY + firstY, maxX, maxY - secondY);
+    CGRect rectForTimer = CGRectMake(minX, minY, maxX, firstY - minY);
+    CGRect rectForGame = CGRectMake(minX, firstY, maxX, maxY - firstY);
+    CGRect drawSpaceForHuman = CGRectMake(minX, firstY, maxX, secondY - firstY);
+    CGRect drawSpaceForGun = CGRectMake(minX, secondY, maxX, maxY - secondY);
     
     
     //adding gun
-    [self addGunInRect:rectForGun];
+    [self addHumanInRect:rectForGame withDrawSpace:drawSpaceForHuman];
 
     //adding human
-    [self addHumanInRect:rectForHuman];
+    [self addGunInRect:rectForGame withDrawSpace:drawSpaceForGun];
     
     //timer label
     [self startTimerInRect:rectForTimer];
@@ -130,23 +132,21 @@
     [self.view addSubview:_timerLabel];
 }
 
-- (void)addHumanInRect:(CGRect)rect {
-    //тоже самое и с человеков от нашего рект будем делать отступы
+- (void)addHumanInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace {
     
     Human* human = [[Human alloc] initWithFrame:rect];
-    human.backgroundColor = [UIColor grayColor];
-    
+    human.drawHumanSpace = drawSpace;
+    human.backgroundColor = [UIColor clearColor];
     [self.view addSubview:human];
     [human autorelease];
 }
 
-- (void)addGunInRect:(CGRect)rect {
-    
+- (void)addGunInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace {
 
     _gunView = [[Gun alloc] initWithFrame:rect];
-
+    _gunView.backgroundColor = [UIColor clearColor];
+    _gunView.drawingGunSpace = drawSpace;
     [self.view addSubview:_gunView];
-    
     [_gunView  autorelease];
     
 }
