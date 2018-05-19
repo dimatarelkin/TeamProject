@@ -20,8 +20,8 @@
 @property (weak, nonatomic) Gun* gunView;
 @property (weak, nonatomic) Human* humanView;
 
-- (void)addHumanInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace;
-- (void)addGunInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace;
+- (void)addHumanInRect:(CGRect)rect;
+- (void)addGunInRect:(CGRect)rect;
 - (void)startTimerInRect:(CGRect)rect;
 
 @end
