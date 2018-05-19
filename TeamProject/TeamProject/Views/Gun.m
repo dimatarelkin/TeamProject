@@ -31,7 +31,7 @@
 
 
 - (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    _whizbang = [[Shot alloc] initWithFrame:CGRectMake(_shotStartPoint.x, _shotStartPoint.y, 16, 16)];
+    _whizbang = [[Shot alloc] initWithFrame:CGRectMake(_shotStartPoint.x, _shotStartPoint.y - 10, 16, 16)];
     
 //    _whizbang = [[Shot alloc] initWithFrame:CGRectMake(self.bounds.origin.x, self.bounds.origin.y, 10, 10)];
     [self.whizbang setAlpha:0];
@@ -67,12 +67,12 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextBeginPath(context);
     
-    CGFloat centerX = CGRectGetMidX(_drawingGunSpace);
-    CGFloat centerY = CGRectGetMidY(_drawingGunSpace);
+    CGFloat centerX = CGRectGetMidX(rect);
+    CGFloat centerY = CGRectGetMidY(rect) * 1.6;
     _shotStartPoint = CGPointMake(centerX - 8, centerY); // минус половина толщины снаряда, если у снаряда width - 10, то минус 5
     
     //constraionts
-    CGFloat deltaX = 8;                        //можно менять размер пушки
+    CGFloat deltaX = 6;                        //можно менять размер пушки
     CGFloat deltaY = deltaX * 8;
     CGFloat offset = deltaX * 3/2;
     CGPoint beginPoint = CGPointMake(centerX - deltaX, centerY + deltaX);
@@ -86,15 +86,17 @@
     CGContextClosePath(context);
     
     //правое колесо
-    CGPoint rightWheelPoint = CGPointMake(beginPoint.x + 2 * deltaX + offset, beginPoint.y + 0.6 *deltaY);
-    CGContextAddEllipseInRect(context, CGRectMake(rightWheelPoint.x, rightWheelPoint.y, deltaX, 0.8 * deltaY ));
+    CGFloat wheelSize = 0.1 * deltaX;   //wheel size
+    
+    CGPoint rightWheelPoint = CGPointMake(beginPoint.x + 2 * deltaX + offset, beginPoint.y + wheelSize * deltaY);
+    CGContextAddEllipseInRect(context, CGRectMake(rightWheelPoint.x, rightWheelPoint.y, deltaX, (1 - wheelSize) * 2 * deltaY));
 
     //левое колесо
-    CGPoint leftWheelPoint = CGPointMake(beginPoint.x - offset - deltaX, beginPoint.y + 0.6 *deltaY);
-    CGContextAddEllipseInRect(context, CGRectMake(leftWheelPoint.x, leftWheelPoint.y, deltaX, 0.8 * deltaY ));
+    CGPoint leftWheelPoint = CGPointMake(beginPoint.x - offset - deltaX, beginPoint.y + wheelSize * deltaY);
+    CGContextAddEllipseInRect(context, CGRectMake(leftWheelPoint.x, leftWheelPoint.y, deltaX, (1 - wheelSize) * 2 * deltaY));
     
     //color
-    CGContextSetFillColorWithColor(context, [UIColor redColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextDrawPath(context, kCGPathFillStroke);
     
     

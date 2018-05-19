@@ -122,9 +122,9 @@
 
     _timerLabel = [[UILabel alloc] initWithFrame:rect];
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-    [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:40]];
+    [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:35]];
     
-    _timerLabel.backgroundColor = [UIColor whiteColor];
+    _timerLabel.backgroundColor = [UIColor clearColor];
     
     _timerLabel.textColor = [UIColor blackColor];
     [_timerLabel setTextAlignment:NSTextAlignmentCenter];

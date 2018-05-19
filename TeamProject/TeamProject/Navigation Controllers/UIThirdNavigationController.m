@@ -32,6 +32,10 @@
                                                                    target:self
                                                                    action:@selector(barButtonItemClick:)];
     [self.navigationItem setRightBarButtonItem:rightButton];
+    
+    //hide left bar button item
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.hidesBackButton = YES;
 }
 
 - (void)barButtonItemClick:(id)sender {
