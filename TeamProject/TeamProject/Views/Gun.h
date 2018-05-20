@@ -11,7 +11,6 @@
 
 
 @interface Gun : UIView
-@property(retain, nonatomic, readonly) Shot *whizbang;
 @property (assign, nonatomic) CGRect drawingGunSpace;
 
 @end
