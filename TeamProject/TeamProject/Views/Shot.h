@@ -9,4 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface Shot : UIView
+@property(assign, nonatomic) CGPoint firstState;
 @end
