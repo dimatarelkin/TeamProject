@@ -9,6 +9,7 @@
 #import "Shot.h"
 
 @implementation Shot
+@synthesize firstState = _firstState;
 
 - (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     
@@ -18,15 +19,15 @@
     
     //Оживляем кнопку после исчезновения и делаем пересет координат(которые делали в complition ^Block)
     self.alpha = 1;
-    [self setFrame:CGRectMake(_firstState.x, _firstState.y, 20, 20)];
+    [self setFrame:CGRectMake(_firstState.x, _firstState.y, 10, 10)];
     
     //анимация
     [CATransaction begin];
     CABasicAnimation *myAnymation = [CABasicAnimation animationWithKeyPath:@"position"];
     [myAnymation setDuration:1.f];
-    [myAnymation setFromValue:[NSValue valueWithCGPoint:CGPointMake(self.layer.position.x, self.layer.position.y)]];
+    //self.layer.position.x
+    [myAnymation setFromValue:[NSValue valueWithCGPoint:CGPointMake(_firstState.x, _firstState.y)]];
     [myAnymation setToValue:[NSValue valueWithCGPoint:CGPointMake(pointOfTouch.x, pointOfTouch.y)]];
-    
     [CATransaction setCompletionBlock:^{
         NSLog(@"END OF ANIMATION!!!");
         [self setCenter:CGPointMake(pointOfTouch.x, pointOfTouch.y)];
