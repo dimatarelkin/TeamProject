@@ -11,8 +11,32 @@
 @implementation Shot
 
 - (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    //Касание и координата касания
     UITouch *myTouch = [[event allTouches] anyObject];
     CGPoint pointOfTouch = [myTouch locationInView:myTouch.view];
+    
+    //Оживляем кнопку после исчезновения и делаем пересет координат(которые делали в complition ^Block)
+    self.alpha = 1;
+    [self setFrame:CGRectMake(_firstState.x, _firstState.y, 20, 20)];
+    
+    //анимация
+    [CATransaction begin];
+    CABasicAnimation *myAnymation = [CABasicAnimation animationWithKeyPath:@"position"];
+    [myAnymation setDuration:1.f];
+    [myAnymation setFromValue:[NSValue valueWithCGPoint:CGPointMake(self.layer.position.x, self.layer.position.y)]];
+    [myAnymation setToValue:[NSValue valueWithCGPoint:CGPointMake(pointOfTouch.x, pointOfTouch.y)]];
+    
+    [CATransaction setCompletionBlock:^{
+        NSLog(@"END OF ANIMATION!!!");
+        [self setCenter:CGPointMake(pointOfTouch.x, pointOfTouch.y)];
+        [UIView animateWithDuration:1.f animations:^{
+            self.alpha = 0;
+        }];
+    }];
+    
+    [self.layer addAnimation:myAnymation forKey:@"animate"];
+    [CATransaction commit];
 }
 
 - (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
