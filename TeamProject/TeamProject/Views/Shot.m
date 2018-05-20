@@ -10,6 +10,14 @@
 
 @implementation Shot
 
+- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UITouch *myTouch = [[event allTouches] anyObject];
+    CGPoint pointOfTouch = [myTouch locationInView:myTouch.view];
+}
+
+- (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
+
+- (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
 
 
 - (void)dealloc {
