@@ -20,7 +20,7 @@
     NSLog(@"NAV3 | viewDidLoad");
     //title and background
     self.title = @"Results";
-    self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = [UIColor blackColor];
     
     
     //add subView

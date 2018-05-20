@@ -82,7 +82,7 @@
 
     
     [self.navigationItem setRightBarButtonItem:myButton];
- [rightButton release];
+    [rightButton release];
    // NSLog(@"NAV1 | viewWillAppear");
 }
 
