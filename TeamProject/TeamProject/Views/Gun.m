@@ -10,7 +10,7 @@
 #import "Shot.h"
 
 @interface Gun()
-@property (assign, nonatomic) CGPoint shotStartPoint;
+//@property (assign, nonatomic) CGPoint shotStartPoint;
 @end
 
 @implementation Gun
@@ -23,6 +23,27 @@
     NSLog(@"TOUCHED MYGUN RECT: %@", NSStringFromCGPoint(convertedGunPointInSuperviewPoint));
 }
 
+//- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    _whizbang = [[Shot alloc] initWithFrame:CGRectMake(_shotStartPoint.x, _shotStartPoint.y - 10, 16, 16)];
+//
+////    _whizbang = [[Shot alloc] initWithFrame:CGRectMake(self.bounds.origin.x, self.bounds.origin.y, 10, 10)];
+//    [self.whizbang setAlpha:0];
+//    [self.whizbang setBackgroundColor:[UIColor clearColor]];
+//    [self addSubview:_whizbang];
+//    [self.whizbang setAlpha:1];
+//    [_whizbang touchesBegan:touches withEvent:event];
+//
+//}
+//
+//- (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    [_whizbang touchesMoved:touches withEvent:event];
+//}
+//
+//- (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+//    [_whizbang touchesEnded:touches withEvent:event];
+//    [_whizbang release];
+//}
+
 
 - (void) dealloc {
     NSLog(@"Gun deallocated");
@@ -33,7 +54,7 @@
 
 - (void)drawRect:(CGRect)rect {
     // Drawing the gun
-    NSLog(@"Gun frame %@",NSStringFromCGRect(_drawingGunSpace));
+//    NSLog(@"Gun frame %@",NSStringFromCGRect(_drawingGunSpace));
 
     
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -45,6 +66,8 @@
     CGFloat centerX = CGRectGetMidX(rect);
     CGFloat centerY = CGRectGetMinY(rect);
     _shotStartPoint = CGPointMake(centerX - 8, centerY); // минус половина толщины снаряда, если у снаряда width - 10, то минус 5
+//    //???
+//    _shotStartPoint = _shot.firstState;
 
     //constraionts
     CGFloat deltaX = 7;                        //можно менять размер пушки
