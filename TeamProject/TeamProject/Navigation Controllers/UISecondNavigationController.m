@@ -20,8 +20,8 @@
 @property (weak, nonatomic) Gun* gunView;
 @property (weak, nonatomic) Human* humanView;
 
-- (void)addHumanInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace;
-- (void)addGunInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace;
+- (void)addHumanInRect:(CGRect)rect;
+- (void)addGunInRect:(CGRect)rect;
 - (void)startTimerInRect:(CGRect)rect;
 
 @end
@@ -35,11 +35,12 @@
     NSLog(@"NAV2 | viewDidLoad");
     //title and background
     self.title = @"Game";
-    self.view.backgroundColor = [UIColor orangeColor];
+    
+    
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     
     //bar button with timer
-   
-    
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Exit"
                                                                     style:UIBarButtonItemStyleDone
                                                                    target:self
@@ -57,20 +58,17 @@
     CGFloat maxY = CGRectGetMaxY(self.view.frame);
     
     CGFloat firstY = (maxY - minY) / 12 + minY;
-    CGFloat secondY = (maxY - firstY) / 2 + firstY;
+//    CGFloat secondY = (maxY - firstY) / 2 + firstY;
 
     //rects
     CGRect rectForTimer = CGRectMake(minX, minY, maxX, firstY - minY);
     CGRect rectForGame = CGRectMake(minX, firstY, maxX, maxY - firstY);
-    CGRect drawSpaceForHuman = CGRectMake(minX, firstY, maxX, secondY - firstY);
-    CGRect drawSpaceForGun = CGRectMake(minX, secondY, maxX, maxY - secondY);
-    
     
     //adding gun
-    [self addHumanInRect:rectForGame withDrawSpace:drawSpaceForHuman];
+    [self addHumanInRect:rectForGame];
 
     //adding human
-    [self addGunInRect:rectForGame withDrawSpace:drawSpaceForGun];
+    [self addGunInRect:rectForGame];
     
     //timer label
     [self startTimerInRect:rectForTimer];
@@ -104,6 +102,8 @@
 }
 
 
+
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -132,20 +132,25 @@
     [self.view addSubview:_timerLabel];
 }
 
-- (void)addHumanInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace {
+- (void)addHumanInRect:(CGRect)rect {
     
     Human* human = [[Human alloc] initWithFrame:rect];
-    human.drawHumanSpace = drawSpace;
+    
     human.backgroundColor = [UIColor clearColor];
     [self.view addSubview:human];
     [human autorelease];
 }
 
-- (void)addGunInRect:(CGRect)rect withDrawSpace:(CGRect)drawSpace {
+- (void)addGunInRect:(CGRect)rect {
 
-    _gunView = [[Gun alloc] initWithFrame:rect];
+    CGFloat newHeight = rect.size.height /5;
+    CGFloat newWidth  = rect.size.width /5;
+    CGFloat originX = CGRectGetMidX(rect) - newWidth /2;
+    CGFloat originY = CGRectGetMaxY(rect) - newHeight;
+    
+    _gunView = [[Gun alloc] initWithFrame:CGRectMake(originX, originY, newWidth, newHeight)];
     _gunView.backgroundColor = [UIColor clearColor];
-    _gunView.drawingGunSpace = drawSpace;
+
     [self.view addSubview:_gunView];
     [_gunView  autorelease];
     
