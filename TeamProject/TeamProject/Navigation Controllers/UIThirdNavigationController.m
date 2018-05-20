@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"NAV3 | viewDidLoad");
+//    NSLog(@"NAV3 | viewDidLoad");
     //title and background
     self.title = @"Results";
     self.view.backgroundColor = [UIColor blackColor];
@@ -62,7 +62,7 @@
     [super viewDidDisappear:animated];
 }
 - (void)dealloc {
-    NSLog(@"NAV3 | dealloc");
+//    NSLog(@"NAV3 | dealloc");
     [super dealloc];
 }
 

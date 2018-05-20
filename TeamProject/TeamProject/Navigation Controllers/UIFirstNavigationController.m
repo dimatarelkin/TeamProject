@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"NAV1 | viewDidLoad");
+//    NSLog(@"NAV1 | viewDidLoad");
     //title and background
     self.title = @"Menu";
     self.view.backgroundColor = [UIColor whiteColor];
@@ -113,7 +113,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"NAV1 | dealloc");
+//    NSLog(@"NAV1 | dealloc");
     [super dealloc];
 }
 

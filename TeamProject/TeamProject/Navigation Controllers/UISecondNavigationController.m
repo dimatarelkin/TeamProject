@@ -19,9 +19,10 @@
 @property (weak, nonatomic) UILabel* timerLabel;
 @property (weak, nonatomic) Gun* gunView;
 @property (weak, nonatomic) Human* humanView;
+@property (weak, nonatomic) Shot *shotView;
 
-- (void)addHumanInRect:(CGRect)rect;
-- (void)addGunInRect:(CGRect)rect;
+//- (void)addHumanInRect:(CGRect)rect;
+- (void)addGunAndHumanInRect:(CGRect)rect;
 - (void)startTimerInRect:(CGRect)rect;
 
 @end
@@ -65,10 +66,10 @@
     CGRect rectForGame = CGRectMake(minX, firstY, maxX, maxY - firstY);
     
     //adding gun
-    [self addHumanInRect:rectForGame];
+//    [self addHumanInRect:rectForGame];
 
     //adding human
-    [self addGunInRect:rectForGame];
+    [self addGunAndHumanInRect:rectForGame];
     
     //timer label
     [self startTimerInRect:rectForTimer];
@@ -84,9 +85,9 @@
 - (void)timerEnds {
     //timer ends and game ends also
     if (seconds == 0) {
-        NSLog(@"Timer ends");
+//        NSLog(@"Timer ends");
         [timer invalidate];
-        NSLog(@"Timer invalidated");
+//        NSLog(@"Timer invalidated");
         
         UIThirdNavigationController *tvc = [[UIThirdNavigationController alloc] init];
         [self.navigationController pushViewController:tvc animated:true];
@@ -97,7 +98,7 @@
     } else {
         seconds -=1;
         _timerLabel.text = [NSString stringWithFormat:@"Time: %d", seconds];
-        NSLog(@"minus 1 sec");
+//        NSLog(@"minus 1 sec");
     }
 }
 
@@ -108,13 +109,13 @@
     [super viewWillAppear:animated];
     
     //timer
-    seconds = 5;
-    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                             target:self
-                                           selector:@selector(timerEnds)
-                                           userInfo:nil
-                                            repeats:YES];
+//    seconds = 5;
+//    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+//    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+//                                             target:self
+//                                           selector:@selector(timerEnds)
+//                                           userInfo:nil
+//                                            repeats:YES];
 }
 
 - (void)startTimerInRect:(CGRect)rect {
@@ -123,41 +124,73 @@
     _timerLabel = [[UILabel alloc] initWithFrame:rect];
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
     [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:35]];
-    
+
     _timerLabel.backgroundColor = [UIColor clearColor];
-    
+
     _timerLabel.textColor = [UIColor blackColor];
     [_timerLabel setTextAlignment:NSTextAlignmentCenter];
     [_timerLabel setAdjustsFontSizeToFitWidth:YES];
     [self.view addSubview:_timerLabel];
 }
 
-- (void)addHumanInRect:(CGRect)rect {
-    
-    Human* human = [[Human alloc] initWithFrame:rect];
-    
-    human.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:human];
-    [human autorelease];
-}
+//- (void)addHumanInRect:(CGRect)rect {
+//
+//    Human* human = [[Human alloc] initWithFrame:rect];
+//
+//    human.backgroundColor = [UIColor clearColor];
+//    [self.view addSubview:human];
+//    [human autorelease];
+//}
 
-- (void)addGunInRect:(CGRect)rect {
+- (void)addGunAndHumanInRect:(CGRect)rect {
 
     CGFloat newHeight = rect.size.height /5;
     CGFloat newWidth  = rect.size.width /5;
     CGFloat originX = CGRectGetMidX(rect) - newWidth /2;
     CGFloat originY = CGRectGetMaxY(rect) - newHeight;
     
+    // Gun init
     _gunView = [[Gun alloc] initWithFrame:CGRectMake(originX, originY, newWidth, newHeight)];
     _gunView.backgroundColor = [UIColor clearColor];
 
     [self.view addSubview:_gunView];
     [_gunView  autorelease];
     
+    //Human init
+    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 50)];
+
+    _humanView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:_humanView];
+    [_humanView autorelease];
+    
+    
+    
+    //Shot init
+    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2,
+                                                        originY,
+                                                        10, 10)];
+    [self.shotView setFirstState:CGPointMake(originX + newWidth / 2, originY)];
+    [_shotView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:_shotView];
+    
+}
+
+
+/* ===========================================Touches Handling methods=================================================*/
+
+- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    UITouch *myTouch = [[event allTouches] anyObject];
+    CGPoint myTouchPoint = [myTouch locationInView:myTouch.view];
+    
+    [_shotView touchesBegan:touches withEvent:event];
+    
+    NSLog(@"%@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
 }
 
 
 
+
+/*
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
 }
@@ -181,7 +214,7 @@
 }
 
 - (void)dealloc {
-    NSLog(@"NAV2 | dealloc");
+//    NSLog(@"NAV2 | dealloc");
     [super dealloc];
     
 }
@@ -189,4 +222,5 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+*/
 @end
