@@ -19,19 +19,19 @@
     
     //Оживляем кнопку после исчезновения и делаем пересет координат(которые делали в complition ^Block)
     self.alpha = 1;
-    [self setFrame:CGRectMake(_firstState.x, _firstState.y, 10, 10)];
+    [self setFrame:CGRectMake(_firstState.x, _firstState.y, 7, 7)];
     
     //анимация
     [CATransaction begin];
     CABasicAnimation *myAnymation = [CABasicAnimation animationWithKeyPath:@"position"];
-    [myAnymation setDuration:1.f];
+    [myAnymation setDuration:0.1f];
     //self.layer.position.x
     [myAnymation setFromValue:[NSValue valueWithCGPoint:CGPointMake(_firstState.x, _firstState.y)]];
     [myAnymation setToValue:[NSValue valueWithCGPoint:CGPointMake(pointOfTouch.x, pointOfTouch.y)]];
     [CATransaction setCompletionBlock:^{
         NSLog(@"END OF ANIMATION!!!");
         [self setCenter:CGPointMake(pointOfTouch.x, pointOfTouch.y)];
-        [UIView animateWithDuration:1.f animations:^{
+        [UIView animateWithDuration:0.5f animations:^{
             self.alpha = 0;
         }];
     }];

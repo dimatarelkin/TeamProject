@@ -12,7 +12,11 @@
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    
+        CALayer* myLayer = [[CALayer alloc] init];
+        myLayer.frame = self.bounds;
+        [myLayer setContents:(id)[UIImage imageNamed:@"fighter-jet"].CGImage];
+        [self.layer addSublayer:myLayer];
+        [myLayer release];
 }
 
 - (void)dealloc {

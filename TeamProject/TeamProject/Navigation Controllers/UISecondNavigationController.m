@@ -133,14 +133,7 @@
     [self.view addSubview:_timerLabel];
 }
 
-//- (void)addHumanInRect:(CGRect)rect {
-//
-//    Human* human = [[Human alloc] initWithFrame:rect];
-//
-//    human.backgroundColor = [UIColor clearColor];
-//    [self.view addSubview:human];
-//    [human autorelease];
-//}
+
 
 - (void)addGunAndHumanInRect:(CGRect)rect {
 
@@ -157,9 +150,9 @@
     [_gunView  autorelease];
     
     //Human init
-    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 50)];
+    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
 
-    _humanView.backgroundColor = [UIColor grayColor];
+    _humanView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_humanView];
     [_humanView autorelease];
     
@@ -183,6 +176,8 @@
     CGPoint myTouchPoint = [myTouch locationInView:myTouch.view];
     
     [_shotView touchesBegan:touches withEvent:event];
+    
+    //Shot init
     
     NSLog(@"%@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
 }
