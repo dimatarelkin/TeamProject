@@ -84,7 +84,7 @@
     //отрисовка таймера из viewDidLoad
     _timerLabel = [[UILabel alloc] initWithFrame:rect];
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-    [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:35]];
+    [_timerLabel setFont:[UIFont fontWithName:@"AvenirNext-Heavy" size:40]];
     _timerLabel.backgroundColor = [UIColor clearColor];
     _timerLabel.textColor = [UIColor blackColor];
     [_timerLabel setTextAlignment:NSTextAlignmentCenter];

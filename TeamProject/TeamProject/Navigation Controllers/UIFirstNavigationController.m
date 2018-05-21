@@ -48,7 +48,7 @@
     teamLabel.layer.backgroundColor = [UIColor clearColor].CGColor;
     teamLabel.textColor = [UIColor blackColor];
     teamLabel.textAlignment = NSTextAlignmentCenter;
-    [teamLabel setFont:[UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:50]];
+    [teamLabel setFont:[UIFont fontWithName:@"AvenirNext-Heavy" size:45]];
     [self.view addSubview: teamLabel];
     
     //add logo layer on view
@@ -66,7 +66,9 @@
     UITextView *info = [[UITextView alloc] initWithFrame:rectForCreatorsInfo];
     [info setText:@"Creators: \nDmitriy Tarelkin\nRodion Ygrinovich\nRoman Krutev\nNataliya Muravieva"];
     info.textAlignment = NSTextAlignmentCenter;
-    [info setFont:[UIFont fontWithName:@"Helvetica" size:16]];
+    info.textColor = [UIColor blackColor];
+    info.layer.backgroundColor = [UIColor clearColor].CGColor;
+    [info setFont:[UIFont fontWithName:@"GillSans-Light" size:18]];
     [self.view addSubview:info];
     
     //releasing objects
