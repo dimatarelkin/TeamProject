@@ -16,6 +16,7 @@
     int seconds;
     NSTimer* timer;
 }
+
 @property (weak, nonatomic) UILabel* timerLabel;
 @property (weak, nonatomic) Gun* gunView;
 @property (weak, nonatomic) Human* humanView;
@@ -95,7 +96,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //запуск таймера
-    seconds = 3;
+    seconds = 30;
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
     timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                              target:self
@@ -137,16 +138,15 @@
     [_gunView  autorelease];
     
     //Shot init
-    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2, originY, 6, 6)];
-    //сетаем координату shot, где он всегда будет появляться
+    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2 - 6, originY +20, 6, 6)];
     [self.shotView setFirstState:CGPointMake(originX + newWidth / 2, originY)];
     [_shotView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:_shotView];
     
-    
     //Human init
-    
-    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    CGFloat randomX = arc4random_uniform(200);
+    CGFloat randomY = 100 + arc4random_uniform(200);
+    _humanView = [[Human alloc] initWithFrame:CGRectMake(randomX, randomY, 85, 40)];
     _humanView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_humanView];
     [_humanView autorelease];

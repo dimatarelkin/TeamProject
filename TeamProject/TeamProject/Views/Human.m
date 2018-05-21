@@ -45,7 +45,7 @@
     CABasicAnimation *killEnemy = [CABasicAnimation animationWithKeyPath:@"position.x"];
     [killEnemy setFromValue:[NSNumber numberWithFloat:self.layer.position.x]];
     [killEnemy setToValue:[NSNumber numberWithFloat:50]];
-    [killEnemy setDuration:2.f];
+    [killEnemy setDuration:1.f];
     [[self.layer presentationLayer] addAnimation:killEnemy forKey:@"kill"];
 }
 
@@ -53,7 +53,8 @@
     // Drawing code
     CALayer* myLayer = [[CALayer alloc] init];
     myLayer.frame = self.bounds;
-    [myLayer setContents:(id)[UIImage imageNamed:@"fighter-jet"].CGImage];
+    myLayer.backgroundColor = [UIColor greenColor].CGColor;
+    [myLayer setContents:(id)[UIImage imageNamed:@"playingJet"].CGImage];
     myLayer.contentsGravity = kCAGravityResizeAspect;
     [self.layer addSublayer:myLayer];
     [myLayer release];

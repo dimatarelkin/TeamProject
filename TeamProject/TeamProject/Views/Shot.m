@@ -29,7 +29,7 @@
 
 //перенёс в отдельный метод
 - (void) startAnimationShot:(CGPoint) EndPoint {
-    self.durationForMainAnimation = 2.f;
+    self.durationForMainAnimation = 0.3f;
     //оживляем снаряд
     self.alpha = 1;
     
