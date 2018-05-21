@@ -150,18 +150,6 @@
     [self.view addSubview:_gunView];
     [_gunView  autorelease];
     
-///<<<<<<< HEAD
-//    //Human init
-//    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
-//
-//    _humanView.backgroundColor = [UIColor clearColor];
-//    [self.view addSubview:_humanView];
-//    [_humanView autorelease];
-    
-    
-//=======
-//>>>>>>> animationLocal21
-    
     //Shot init
     _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2,
                                                         originY,
@@ -190,12 +178,6 @@
     
     [_humanView setFlagHuman:NO];
     
-///<<<<<<< HEAD
-//    //Shot init
-//
-//    NSLog(@"%@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
-//=======
-    
     //Елси нажимаем на врага
     if(_humanView.flagHuman) {
         [_humanView touchesBegan:touches withEvent:event];
@@ -204,7 +186,6 @@
         [_shotView startAnimationShot:myTouchPoint];
     }
     NSLog(@"TOUCHED VC %@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
-//>>>>>>> animationLocal21
 }
 
 
