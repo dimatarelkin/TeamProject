@@ -21,7 +21,6 @@
 @property (weak, nonatomic) Human* humanView;
 @property (weak, nonatomic) Shot *shotView;
 
-//- (void)addHumanInRect:(CGRect)rect;
 - (void)addGunAndHumanInRect:(CGRect)rect;
 - (void)startTimerInRect:(CGRect)rect;
 
@@ -34,46 +33,45 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"NAV2 | viewDidLoad");
+    
     //title and background
-    self.title = @"Game";
-    
-    
+    self.title = @"SHOOT!";
     self.view.backgroundColor = [UIColor whiteColor];
     
+    //bar button customization
+    UIButton *backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    backButton.layer.cornerRadius = 15;
+    backButton.clipsToBounds = NO;
+    [backButton.layer setBackgroundColor:[UIColor clearColor].CGColor];
     
-    //bar button with timer
-    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithTitle:@"Exit"
-                                                                    style:UIBarButtonItemStyleDone
-                                                                   target:self
-                                                                   action:@selector(barButtonItemClick:)];
+    [backButton setTitle:@"Menu" forState:UIControlStateNormal];
+    [[backButton titleLabel] setFont:[UIFont fontWithName:@"AvenirNext-Heavy" size:20]];
+    [backButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [backButton setTitleColor:[[UIColor purpleColor] colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
+    [backButton addTarget:self action:@selector(barButtonItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:leftButton];
 
-   
-    //prepare rects for view
     //coordinats
     CGRect navigationBarFrame = [[self.navigationController navigationBar] frame];
-    
     CGFloat minX = CGRectGetMinX(navigationBarFrame);
     CGFloat minY = CGRectGetMaxY(navigationBarFrame);
     CGFloat maxX = CGRectGetMaxX(self.view.frame);
     CGFloat maxY = CGRectGetMaxY(self.view.frame);
-    
     CGFloat firstY = (maxY - minY) / 12 + minY;
-//    CGFloat secondY = (maxY - firstY) / 2 + firstY;
 
     //rects
     CGRect rectForTimer = CGRectMake(minX, minY, maxX, firstY - minY);
     CGRect rectForGame = CGRectMake(minX, firstY, maxX, maxY - firstY);
-    
-    //adding gun
-//    [self addHumanInRect:rectForGame];
 
-    //adding human
+    //adding human and gun
     [self addGunAndHumanInRect:rectForGame];
     
     //timer label
     [self startTimerInRect:rectForTimer];
     
+    //releasing objects
+    [backButton release];
     
 }
 
@@ -82,58 +80,47 @@
     [timer invalidate];
 }
 
-- (void)timerEnds {
-    //timer ends and game ends also
-    if (seconds == 0) {
-//        NSLog(@"Timer ends");
-        [timer invalidate];
-//        NSLog(@"Timer invalidated");
-        
-        UIThirdNavigationController *tvc = [[UIThirdNavigationController alloc] init];
-        [self.navigationController pushViewController:tvc animated:true];
-        
-        [timer invalidate];
-        [tvc release];
-
-    } else {
-        seconds -=1;
-        _timerLabel.text = [NSString stringWithFormat:@"Time: %d", seconds];
-//        NSLog(@"minus 1 sec");
-    }
-}
-
-
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    //timer
-//    seconds = 5;
-//    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-//    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-//                                             target:self
-//                                           selector:@selector(timerEnds)
-//                                           userInfo:nil
-//                                            repeats:YES];
-}
-
 - (void)startTimerInRect:(CGRect)rect {
-    seconds = 5;
-
+    //отрисовка таймера из viewDidLoad
     _timerLabel = [[UILabel alloc] initWithFrame:rect];
     [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
     [_timerLabel setFont:[UIFont fontWithName:@"Helvetica" size:35]];
-
     _timerLabel.backgroundColor = [UIColor clearColor];
-
     _timerLabel.textColor = [UIColor blackColor];
     [_timerLabel setTextAlignment:NSTextAlignmentCenter];
     [_timerLabel setAdjustsFontSizeToFitWidth:YES];
     [self.view addSubview:_timerLabel];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //запуск таймера
+    seconds = 3;
+    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                             target:self
+                                           selector:@selector(timerEnds)
+                                           userInfo:nil
+                                            repeats:YES];
+}
 
+- (void)timerEnds {
+    //timer ends and game ends also
+    if (seconds == 0) {
+        [timer invalidate];
+        NSLog(@"Timer invalidated");
+        UIThirdNavigationController *tvc = [[UIThirdNavigationController alloc] init];
+        [self.navigationController pushViewController:tvc animated:true];
+        [timer invalidate];
+        
+        //release objects
+        [tvc release];
+
+    } else {
+        seconds -=1;
+        _timerLabel.text = [NSString stringWithFormat:@"Time: %d", seconds];
+    }
+}
 
 - (void)addGunAndHumanInRect:(CGRect)rect {
 
@@ -146,14 +133,11 @@
     // Gun init
     _gunView = [[Gun alloc] initWithFrame:CGRectMake(originX, originY, newWidth, newHeight)];
     _gunView.backgroundColor = [UIColor clearColor];
-
     [self.view addSubview:_gunView];
     [_gunView  autorelease];
     
     //Shot init
-    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2,
-                                                        originY,
-                                                        20, 20)];
+    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2, originY, 6, 6)];
     //сетаем координату shot, где он всегда будет появляться
     [self.shotView setFirstState:CGPointMake(originX + newWidth / 2, originY)];
     [_shotView setBackgroundColor:[UIColor clearColor]];
@@ -161,13 +145,14 @@
     
     
     //Human init
-    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 50)];
     
-    _humanView.backgroundColor = [UIColor grayColor];
+    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    _humanView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_humanView];
     [_humanView autorelease];
     [_humanView setShot:_shotView];
 }
+
 
 
 /* ===========================================Touches Handling methods=================================================*/
@@ -188,9 +173,6 @@
     NSLog(@"TOUCHED VC %@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
 }
 
-
-
-/*
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
 }
@@ -222,5 +204,5 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
-*/
+
 @end

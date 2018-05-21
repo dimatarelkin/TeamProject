@@ -64,7 +64,9 @@
 }
 
 - (void)drawRect:(CGRect)rect {
+    
     // Drawing code
+    
     self.backgroundColor = [UIColor clearColor];
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextAddEllipseInRect(context, rect);
