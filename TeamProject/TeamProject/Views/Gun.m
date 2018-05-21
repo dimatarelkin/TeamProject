@@ -16,11 +16,11 @@
 @implementation Gun
 
 - (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    UITouch *myTouch = [[event allTouches] anyObject];
-    CGPoint pointOfTouch = [myTouch locationInView:myTouch.view];
-    
-    CGPoint convertedGunPointInSuperviewPoint = [self convertPoint:pointOfTouch toView:self.superview];
-    NSLog(@"TOUCHED MYGUN RECT: %@", NSStringFromCGPoint(convertedGunPointInSuperviewPoint));
+//    UITouch *myTouch = [[event allTouches] anyObject];
+//    CGPoint pointOfTouch = [myTouch locationInView:myTouch.view];
+//
+//    CGPoint convertedGunPointInSuperviewPoint = [self convertPoint:pointOfTouch toView:self.superview];
+//    NSLog(@"TOUCHED MYGUN RECT: %@", NSStringFromCGPoint(convertedGunPointInSuperviewPoint));
 }
 
 
