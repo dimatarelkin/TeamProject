@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "Human.h"
 
 @interface Shot : UIView
 @property(assign, nonatomic) CGPoint firstState;
+//???
+@property(assign, nonatomic) CGPoint endState;
 @property(assign, nonatomic, readonly) CFTimeInterval durationForMainAnimation;
+
+@property(weak, nonatomic) Human *human;
 
 - (void) startAnimationShot:(CGPoint) endPoint;
 - (void) blastTheShot;
