@@ -8,7 +8,6 @@
 
 #import "UISecondNavigationController.h"
 #import "UIThirdNavigationController.h"
-#import "Game.h"
 #import "Gun.h"
 #import "Human.h"
 
@@ -73,6 +72,8 @@
     
     //releasing objects
     [backButton release];
+    
+    [self.humanView startHumanAnimation];
     
 }
 
@@ -166,13 +167,17 @@
     //Елси нажимаем на врага
     if(_humanView.flagHuman) {
         [_humanView touchesBegan:touches withEvent:event];
+        [_humanView.layer removeAllAnimations];
     } else {
         //СТАРТУЕМ И УКАЗЫВАЕМ КОНЕЧНУЮ ТОЧКУ ПОЛЁТА
         [_shotView startAnimationShot:myTouchPoint];
     }
-    NSLog(@"TOUCHED VC %@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
+//    NSLog(@"TOUCHED VC %@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
+    NSLog(@"%@", NSStringFromCGPoint(_humanView.layer.presentationLayer.position));
 }
 
+
+/*
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
 }
@@ -190,19 +195,18 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-}
-
-- (void)dealloc {
-//    NSLog(@"NAV2 | dealloc");
-    [super dealloc];
-    
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+*/
+
+- (void)dealloc {
+    //    NSLog(@"NAV2 | dealloc");
+    [super dealloc];
+    
+}
 @end

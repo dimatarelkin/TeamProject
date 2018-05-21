@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Gun.h"
+#import "Human.h"
+#import "Shot.h"
 
 @interface UISecondNavigationController : UIViewController
 

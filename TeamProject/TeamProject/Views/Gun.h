@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Shot.h"
+
 
 
 @interface Gun : UIView
 @property (assign, nonatomic) CGRect drawingGunSpace;
 @property (assign, nonatomic) CGPoint shotStartPoint;
-//???
-//@property(retain, nonatomic) Shot *shot;
+
 @end
