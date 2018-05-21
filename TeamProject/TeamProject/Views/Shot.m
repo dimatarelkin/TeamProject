@@ -8,18 +8,34 @@
 
 #import "Shot.h"
 
+
 @implementation Shot
 @synthesize firstState = _firstState;
 
 - (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    //В МЕТОД ДОБАВИЛ ТОЛЬКО АЛЬФУ, СЕТ НЕ ДОБАВЛЯЛ И АНАМАЦИЯ НАЧИНАЕТСЯ С ПУШКИ КАК ОБЫЧНО
+    //?????
+//    [self setFrame:CGRectMake(_firstState.x, _firstState.y, 10, 10)];
     
-    //Касание и координата касания
+    
     UITouch *myTouch = [[event allTouches] anyObject];
     CGPoint pointOfTouch = [myTouch locationInView:myTouch.view];
-    
-    //Оживляем кнопку после исчезновения и делаем пересет координат(которые делали в complition ^Block)
+    //ТУТ УКАЗЫВАЕМ КОНЕЧНУЮ ТОЧКУ
+    [self startAnimationShot:pointOfTouch];
+}
+
+
+- (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
+
+- (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
+
+
+//перенёс в отдельный метод
+- (void) startAnimationShot:(CGPoint) EndPoint {
+    //оживляем снаряд
     self.alpha = 1;
-    [self setFrame:CGRectMake(_firstState.x, _firstState.y, 10, 10)];
+    //    UITouch *myTouch = [[event allTouches] anyObject];
+    //    CGPoint pointOfTouch = [touch locationInView:touch.view];
     
     //анимация
     [CATransaction begin];
@@ -27,22 +43,26 @@
     [myAnymation setDuration:1.f];
     //self.layer.position.x
     [myAnymation setFromValue:[NSValue valueWithCGPoint:CGPointMake(_firstState.x, _firstState.y)]];
-    [myAnymation setToValue:[NSValue valueWithCGPoint:CGPointMake(pointOfTouch.x, pointOfTouch.y)]];
+    [myAnymation setToValue:[NSValue valueWithCGPoint:CGPointMake(EndPoint.x,
+                                                                  EndPoint.y)]];
     [CATransaction setCompletionBlock:^{
         NSLog(@"END OF ANIMATION!!!");
-        [self setCenter:CGPointMake(pointOfTouch.x, pointOfTouch.y)];
-        [UIView animateWithDuration:1.f animations:^{
-            self.alpha = 0;
-        }];
+        //делаем пересет координат по завершении анимации МЕНЯЮ ТУТ РАНЬШЕ БЫЛИ
+        [self setCenter:CGPointMake(EndPoint.x, EndPoint.y)];
+        [self blastTheShot];
     }];
     
     [self.layer addAnimation:myAnymation forKey:@"animate"];
     [CATransaction commit];
 }
 
-- (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
-
-- (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
+//анимация для complition block
+- (void) blastTheShot {
+    NSLog(@"SHOT BLASTED");
+    [self.class animateWithDuration:3.f animations:^{
+        self.alpha = 0;
+    }];
+}
 
 
 - (void)dealloc {
