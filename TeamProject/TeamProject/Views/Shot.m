@@ -7,6 +7,7 @@
 //
 
 #import "Shot.h"
+#import "Human.h"
 
 @interface Shot()
 @property(assign, nonatomic, readwrite) CFTimeInterval durationForMainAnimation;
@@ -29,7 +30,10 @@
 
 //перенёс в отдельный метод
 - (void) startAnimationShot:(CGPoint) EndPoint {
-    self.durationForMainAnimation = 2.f;
+    //каждый раз будет пересет проперти конечной координаты
+    [self setEndState:EndPoint];
+    //
+    self.durationForMainAnimation = 0.5f;
     //оживляем снаряд
     self.alpha = 1;
     
@@ -52,7 +56,7 @@
 //анимация для complition block
 - (void) blastTheShot {
     NSLog(@"SHOT BLASTED");
-    [self.class animateWithDuration:1.f animations:^{
+    [self.class animateWithDuration:0.1f animations:^{
         self.alpha = 0;
     }];
 }

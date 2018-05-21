@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Shot.h"
+//#import "Shot.h"
 
 
 @interface Gun : UIView

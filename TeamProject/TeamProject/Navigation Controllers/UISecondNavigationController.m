@@ -8,7 +8,6 @@
 
 #import "UISecondNavigationController.h"
 #import "UIThirdNavigationController.h"
-#import "Game.h"
 #import "Gun.h"
 #import "Human.h"
 
@@ -70,8 +69,36 @@
     //timer label
     [self startTimerInRect:rectForTimer];
     
+///<<<<<<< HEAD
     //releasing objects
     [backButton release];
+//=======
+//    [CATransaction begin];
+//    CABasicAnimation *start = [CABasicAnimation animationWithKeyPath:@"position.x"];
+//    [start setFromValue:[NSNumber numberWithFloat:_humanView.layer.position.x]];
+//    [start setToValue:[NSNumber numberWithFloat:50]];
+//    [start setDuration:3.f];
+////    [start setRepeatCount:INFINITY];
+//
+//
+//    [CATransaction setCompletionBlock:^{
+//        NSLog(@"COMPLETE");
+////        [_humanView.layer removeAnimationForKey:@"startAnimation"];
+//        [_humanView.layer setPosition:CGPointMake(50, [_humanView.layer presentationLayer].position.x)];
+//        [_humanView.layer removeAnimationForKey:@"startAnimation"];
+//        CABasicAnimation *reverce = [CABasicAnimation animationWithKeyPath:@"position.x"];
+//        [reverce setFromValue:[NSNumber numberWithFloat:50]];
+//        [reverce setToValue:[NSNumber numberWithFloat:300]];
+//        [reverce setDuration:3.f];
+//        [_humanView.layer addAnimation:start forKey:@"reverceAnimation"];
+//    }];
+//    [_humanView.layer addAnimation:start forKey:@"startAnimation"];
+    
+    [self.humanView startHumanAnimation];
+    
+    
+    
+//>>>>>>> localAnimation22
     
 }
 
@@ -166,13 +193,17 @@
     //Елси нажимаем на врага
     if(_humanView.flagHuman) {
         [_humanView touchesBegan:touches withEvent:event];
+        [_humanView.layer removeAllAnimations];
     } else {
         //СТАРТУЕМ И УКАЗЫВАЕМ КОНЕЧНУЮ ТОЧКУ ПОЛЁТА
         [_shotView startAnimationShot:myTouchPoint];
     }
-    NSLog(@"TOUCHED VC %@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
+//    NSLog(@"TOUCHED VC %@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
+    NSLog(@"%@", NSStringFromCGPoint(_humanView.layer.presentationLayer.position));
 }
 
+
+/*
 - (void)viewWillLayoutSubviews {
     [super viewWillLayoutSubviews];
 }
@@ -190,19 +221,18 @@
     [super viewWillDisappear:animated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    
-}
-
-- (void)dealloc {
-//    NSLog(@"NAV2 | dealloc");
-    [super dealloc];
-    
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+}
+*/
+
+- (void)dealloc {
+    //    NSLog(@"NAV2 | dealloc");
+    [super dealloc];
+    
+}
 @end
