@@ -15,34 +15,7 @@
 
 @implementation Gun
 
-- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    UITouch *myTouch = [[event allTouches] anyObject];
-    CGPoint pointOfTouch = [myTouch locationInView:myTouch.view];
-    
-    CGPoint convertedGunPointInSuperviewPoint = [self convertPoint:pointOfTouch toView:self.superview];
-    NSLog(@"TOUCHED MYGUN RECT: %@", NSStringFromCGPoint(convertedGunPointInSuperviewPoint));
-}
-
-//- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    _whizbang = [[Shot alloc] initWithFrame:CGRectMake(_shotStartPoint.x, _shotStartPoint.y - 10, 16, 16)];
-//
-////    _whizbang = [[Shot alloc] initWithFrame:CGRectMake(self.bounds.origin.x, self.bounds.origin.y, 10, 10)];
-//    [self.whizbang setAlpha:0];
-//    [self.whizbang setBackgroundColor:[UIColor clearColor]];
-//    [self addSubview:_whizbang];
-//    [self.whizbang setAlpha:1];
-//    [_whizbang touchesBegan:touches withEvent:event];
-//
-//}
-//
-//- (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    [_whizbang touchesMoved:touches withEvent:event];
-//}
-//
-//- (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    [_whizbang touchesEnded:touches withEvent:event];
-//    [_whizbang release];
-//}
+- (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
 
 
 - (void) dealloc {
@@ -65,6 +38,7 @@
     
     CGFloat centerX = CGRectGetMidX(rect);
     CGFloat centerY = CGRectGetMinY(rect);
+    //!!!Координата, где всегда будет появляться shot!!! (firstState та же _shotStartPoint)
     _shotStartPoint = CGPointMake(centerX - 8, centerY); // минус половина толщины снаряда, если у снаряда width - 10, то минус 5
 //    //???
 //    _shotStartPoint = _shot.firstState;

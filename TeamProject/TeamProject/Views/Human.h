@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Shot.h"
 
 @interface Human : UIView
-@property (assign, nonatomic) CGRect drawHumanSpace;
+@property(assign, nonatomic) CGRect drawHumanSpace;
+//нужно, чтобы вызвать в методе Human вызвать метода Shot(Touches begin и запустить анимацию)
+@property(weak, nonatomic) Shot *shot;
+@property(assign, nonatomic) BOOL flagHuman;
+
+- (void) startShotAnimatuonWhenTouchHuman:(UITouch *) touch;
+- (void) killHumanAnimation;
 
 @end

@@ -141,6 +141,7 @@
     CGFloat newWidth  = rect.size.width /5;
     CGFloat originX = CGRectGetMidX(rect) - newWidth /2;
     CGFloat originY = CGRectGetMaxY(rect) - newHeight;
+    NSLog(@"%f,%f,%f,%f", newHeight, newWidth,originX,originY);
     
     // Gun init
     _gunView = [[Gun alloc] initWithFrame:CGRectMake(originX, originY, newWidth, newHeight)];
@@ -149,23 +150,35 @@
     [self.view addSubview:_gunView];
     [_gunView  autorelease];
     
-    //Human init
-    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
-
-    _humanView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_humanView];
-    [_humanView autorelease];
+///<<<<<<< HEAD
+//    //Human init
+//    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+//
+//    _humanView.backgroundColor = [UIColor clearColor];
+//    [self.view addSubview:_humanView];
+//    [_humanView autorelease];
     
     
+//=======
+//>>>>>>> animationLocal21
     
     //Shot init
     _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2,
                                                         originY,
-                                                        10, 10)];
+                                                        20, 20)];
+    //сетаем координату shot, где он всегда будет появляться
     [self.shotView setFirstState:CGPointMake(originX + newWidth / 2, originY)];
     [_shotView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:_shotView];
     
+    
+    //Human init
+    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 50)];
+    
+    _humanView.backgroundColor = [UIColor grayColor];
+    [self.view addSubview:_humanView];
+    [_humanView autorelease];
+    [_humanView setShot:_shotView];
 }
 
 
@@ -175,13 +188,24 @@
     UITouch *myTouch = [[event allTouches] anyObject];
     CGPoint myTouchPoint = [myTouch locationInView:myTouch.view];
     
-    [_shotView touchesBegan:touches withEvent:event];
+    [_humanView setFlagHuman:NO];
     
-    //Shot init
+///<<<<<<< HEAD
+//    //Shot init
+//
+//    NSLog(@"%@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
+//=======
     
-    NSLog(@"%@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
+    //Елси нажимаем на врага
+    if(_humanView.flagHuman) {
+        [_humanView touchesBegan:touches withEvent:event];
+    } else {
+        //СТАРТУЕМ И УКАЗЫВАЕМ КОНЕЧНУЮ ТОЧКУ ПОЛЁТА
+        [_shotView startAnimationShot:myTouchPoint];
+    }
+    NSLog(@"TOUCHED VC %@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
+//>>>>>>> animationLocal21
 }
-
 
 
 

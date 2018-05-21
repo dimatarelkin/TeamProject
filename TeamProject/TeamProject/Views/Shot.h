@@ -7,8 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Gun.h"
+
 
 @interface Shot : UIView
-@property (assign, nonatomic) CGPoint firstState;
+@property(assign, nonatomic) CGPoint firstState;
+@property(assign, nonatomic, readonly) CFTimeInterval durationForMainAnimation;
+
+- (void) startAnimationShot:(CGPoint) endPoint;
+- (void) blastTheShot;
+
 @end
