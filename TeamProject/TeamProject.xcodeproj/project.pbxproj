@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3216B23220AB7580000965B8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B23120AB7580000965B8 /* AppDelegate.m */; };
-		3216B23A20AB7581000965B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3216B23920AB7581000965B8 /* Assets.xcassets */; };
 		3216B23D20AB7581000965B8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3216B23B20AB7581000965B8 /* LaunchScreen.storyboard */; };
 		3216B24020AB7581000965B8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B23F20AB7581000965B8 /* main.m */; };
 		3216B24820AB76A0000965B8 /* UIFirstNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B24720AB76A0000965B8 /* UIFirstNavigationController.m */; };
@@ -18,13 +17,13 @@
 		3216B25520AC3D11000965B8 /* Gun.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25420AC3D11000965B8 /* Gun.m */; };
 		3216B25820AC3D91000965B8 /* Human.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25720AC3D91000965B8 /* Human.m */; };
 		3216B25B20AC3DA5000965B8 /* Shot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25A20AC3DA5000965B8 /* Shot.m */; };
+		3279301E20B35EFC002B1957 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3279301D20B35EFC002B1957 /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3216B22D20AB757F000965B8 /* TeamProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3216B23020AB757F000965B8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3216B23120AB7580000965B8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3216B23920AB7581000965B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3216B23C20AB7581000965B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3216B23E20AB7581000965B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3216B23F20AB7581000965B8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		3216B25720AC3D91000965B8 /* Human.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Human.m; sourceTree = "<group>"; };
 		3216B25920AC3DA5000965B8 /* Shot.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shot.h; sourceTree = "<group>"; };
 		3216B25A20AC3DA5000965B8 /* Shot.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Shot.m; sourceTree = "<group>"; };
+		3279301D20B35EFC002B1957 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +79,7 @@
 				3216B24F20AB770D000965B8 /* Navigation Controllers */,
 				3216B23020AB757F000965B8 /* AppDelegate.h */,
 				3216B23120AB7580000965B8 /* AppDelegate.m */,
-				3216B23920AB7581000965B8 /* Assets.xcassets */,
+				3279301D20B35EFC002B1957 /* Assets.xcassets */,
 				3216B23B20AB7581000965B8 /* LaunchScreen.storyboard */,
 				3216B23E20AB7581000965B8 /* Info.plist */,
 				3216B23F20AB7581000965B8 /* main.m */,
@@ -180,8 +180,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3279301E20B35EFC002B1957 /* Assets.xcassets in Resources */,
 				3216B23D20AB7581000965B8 /* LaunchScreen.storyboard in Resources */,
-				3216B23A20AB7581000965B8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

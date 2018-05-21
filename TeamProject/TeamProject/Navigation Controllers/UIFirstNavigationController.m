@@ -17,9 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"NAVC 1 viewDidLoad");
     
     //title and background
-    self.title = @"AIRBORNE";
+    self.title = @"Main";
     self.navigationController.navigationBar.titleTextAttributes =
     @{NSForegroundColorAttributeName: [UIColor blackColor],
                  NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-Heavy" size:20]};
@@ -27,15 +28,51 @@
     [self.navigationController.navigationBar setBarStyle:UIBarStyleDefault];
     [self.view setBackgroundColor: [UIColor whiteColor]];
     
+    //add constraints
+    CGRect navigationBarFrame = [[self.navigationController navigationBar] frame];
+    CGFloat minX = CGRectGetMinX(navigationBarFrame);
+    CGFloat minY = CGRectGetMaxY(navigationBarFrame);
+    CGFloat maxX = CGRectGetMaxX(self.view.frame);
+    CGFloat maxY = CGRectGetMaxY(self.view.frame);
+    CGFloat firstY = minY * 2;
+    CGFloat secondY = firstY + maxX;
+    
+    //create rects
+    CGRect rectForGameName = CGRectMake(minX, minY, maxX, minY);
+    CGRect rectForLogoLayer = CGRectMake(minX, firstY, maxX, maxX);
+    CGRect rectForCreatorsInfo = CGRectMake(minX, secondY, maxX, maxY - secondY);
+    
     //name of our team
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(130, 100, 300, 50)];
-    [label setText:@"OUR AWESOME TEAM"];
-    [label setFont:[UIFont fontWithName:@"AvenirNext-Heavy" size:20]];
-    [self.view addSubview: label];
+    UILabel *teamLabel = [[UILabel alloc] initWithFrame:rectForGameName];
+    [teamLabel setText:@"First Team"];
+    teamLabel.layer.backgroundColor = [UIColor clearColor].CGColor;
+    teamLabel.textColor = [UIColor blackColor];
+    teamLabel.textAlignment = NSTextAlignmentCenter;
+    [teamLabel setFont:[UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:50]];
+    [self.view addSubview: teamLabel];
+    
+    //add logo layer on view
+    CALayer* logoLayer = [[CALayer alloc] init];
+    logoLayer.frame = rectForLogoLayer;
+    CGFloat offset = CGRectGetMaxY(self.view.frame)/6;
+    logoLayer.bounds = CGRectMake(rectForLogoLayer.origin.x + offset, rectForLogoLayer.origin.y + offset,
+                                  rectForLogoLayer.size.width - offset, rectForLogoLayer.size.height - offset);
+    logoLayer.backgroundColor = [UIColor clearColor].CGColor;
+    [logoLayer setContents:(id)[UIImage imageNamed:@"Airborne"].CGImage];
+    logoLayer.contentsGravity = kCAGravityResizeAspect;
+    [self.view.layer addSublayer:logoLayer];
+    
+    //add creators info
+    UITextView *info = [[UITextView alloc] initWithFrame:rectForCreatorsInfo];
+    [info setText:@"Creators: \nDmitriy Tarelkin\nRodion Ygrinovich\nRoman Krutev\nNataliya Muravieva"];
+    info.textAlignment = NSTextAlignmentCenter;
+    [info setFont:[UIFont fontWithName:@"Helvetica" size:16]];
+    [self.view addSubview:info];
     
     //releasing objects
-    
-    [label release];
+    [logoLayer release];
+    [teamLabel release];
+    [info release];
    
 }
 
