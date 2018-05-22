@@ -8,6 +8,7 @@
 
 #import "Human.h"
 #import "Shot.h"
+#import "UISecondNavigationController.h"
 
 @implementation Human
 
@@ -19,18 +20,11 @@
     CGPoint convertedPointOfMyTouchToSUPERVIEW = [self convertPoint:pointOfMyTouch toView:self.superview];
     NSLog(@"TOUCHED ON ENEMY %@", NSStringFromCGPoint(convertedPointOfMyTouchToSUPERVIEW));
     
-    
     [self startShotAnimatuonWhenTouchHuman:myTouch];
     
     //сравнение, попадает ли снаряд в цель
     if(CGRectContainsPoint(self.layer.presentationLayer.frame, _shot.endState)) {
         _flagHuman = YES;
-        //валит прилагу
-//        [self performSelector:@selector(invalidate) withObject:nil afterDelay:[_shot durationForMainAnimation]];
-        
-//        [self performSelector:@selector(invalidatingTimer) withObject:nil afterDelay:[_shot durationForMainAnimation]];
-//        NSLog(@"PAYSE");
-//        [self performSelector:@selector(pauseLayer) withObject:nil afterDelay:([_shot durationForMainAnimation] + 0.1f)];
         [self performSelector:@selector(removeAnim) withObject:nil afterDelay:([_shot durationForMainAnimation] + 0.1f)];
         //      //начинаем анамацию с задержкой
         [self performSelector:@selector(moveView:) withObject:self afterDelay:([_shot durationForMainAnimation])];
@@ -43,8 +37,6 @@
 
 - (void) removeAnim {
     [self.layer removeAnimationForKey:@"anim"];
-//    [self.layer removeAnimationForKey:@"anim2"];
-//    [self.layer removeAnimationForKey:@"anim3"];
 }
 
 //Анимация при нажатии на врага (вызываем метод анимации из shot и передаём ему преобразованные координаты касания в системе NavController)
@@ -54,18 +46,11 @@
     [_shot startAnimationShot:convertedInSuperview];
 }
 
-- (void) killHumanAnimation {
-    NSLog(@"killHumanAnimation");
-//    [CATransaction begin];
-    [self moveView:self];
-    
-//    CABasicAnimation *death = [CABasicAnimation animationWithKeyPath:@"position"];
-//
-//    [self.layer addAnimation:death forKey:@"death"];
-//    [CATransaction commit];
-}
 
+//анимация killHuman
 - (void)moveView:(UIView*) view {
+    self.counterKill += 1;
+    NSLog(@"counterKill = %i", _counterKill);
     [UIView animateWithDuration:1
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
@@ -93,7 +78,15 @@
                      completion:^(BOOL finished) {
                          //animation end
                          NSLog(@"First animation ends with %@", finished ? @"YES":@"NO");
+                         CGAffineTransform scale = CGAffineTransformMakeScale(1,1);
+                         
+                         //transform
+                         view.transform = scale;
+                        [_timerCheck invalidate];
+                        [self startHumanAnimation];
                      }];
+    NSLog(@"MOVE VIew ENDED");
+    [_timerCheck invalidate];
 }
 
 - (void) invalidatingTimer {
@@ -102,22 +95,24 @@
 }
 
 - (void) startHumanAnimation {
-    [CATransaction begin];
-    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-    animation.duration = 1.f;
-//    animation.beginTime = CACurrentMediaTime();
-    [animation setFromValue:[NSValue valueWithCGPoint:self.layer.position]];
-    [animation setToValue:[NSValue valueWithCGPoint:CGPointMake(50, self.layer.position.y)]];
-//    animation.removedOnCompletion = YES;
-    animation.fillMode = kCAFillModeBoth;
-    _timerCheck = [NSTimer scheduledTimerWithTimeInterval:0.1f repeats:YES block:^(NSTimer * _Nonnull timer) {
-        [self.layer setPosition:self.layer.presentationLayer.position];
-//        NSLog(@"%@", NSStringFromCGPoint(self.layer.presentationLayer.position));
-    }];
-    [animation setAutoreverses:YES];
-    [animation setRepeatCount:INFINITY];
-    [self.layer addAnimation:animation forKey:@"anim"];
-    [CATransaction commit];
+    
+    if(!_stopTimerBySeconds) {
+        [CATransaction begin];
+        CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
+        animation.duration = 1.f;
+        [animation setFromValue:[NSValue valueWithCGPoint:CGPointMake(self.superview.frame.size.width,
+                                                                      self.layer.position.y)]];
+        [animation setToValue:[NSValue valueWithCGPoint:CGPointMake(-(self.layer.frame.size.width), self.layer.position.y)]];
+        animation.fillMode = kCAFillModeBoth;
+        
+        _timerCheck = [NSTimer scheduledTimerWithTimeInterval:0.1f repeats:YES block:^(NSTimer * _Nonnull timer) {
+            [self.layer setPosition:self.layer.presentationLayer.position];
+            NSLog(@"%@", NSStringFromCGPoint(self.layer.presentationLayer.position));
+        }];
+        [animation setRepeatCount:INFINITY];
+        [self.layer addAnimation:animation forKey:@"anim"];
+        [CATransaction commit];
+    }
 }
 
 
@@ -125,81 +120,17 @@
     // Drawing code
     CALayer* myLayer = [[CALayer alloc] init];
     myLayer.frame = self.bounds;
-    [myLayer setContents:(id)[UIImage imageNamed:@"fighter-jet"].CGImage];
+    myLayer.backgroundColor = [UIColor clearColor].CGColor;
+    [myLayer setContents:(id)[UIImage imageNamed:@"playingJet"].CGImage];
     myLayer.contentsGravity = kCAGravityResizeAspect;
     [self.layer addSublayer:myLayer];
     [myLayer release];
+    
 }
 
 - (void)dealloc {
     [super dealloc];
+    NSLog(@"HUMAN DEALLOCATED");
 }
 
 @end
-
-
-//Random, но кривой(
-//    CGFloat lowX = 50;
-//    CGFloat maxX = 100;
-//    CGFloat lowY = 45;
-//    CGFloat maxY = 105;
-//    CGFloat X = (((CGFloat)arc4random()/0x100000000)*(maxX-lowX)+lowX);
-//    CGFloat Y = (((CGFloat)arc4random()/0x100000000)*(maxY-lowY)+lowY);
-//    [self setAlpha:1];
-
-
-
-//- (void) anitamationAfterKillHuman {
-//    NSLog(@"AnimationAfterKillHuman");
-//}
-
-//останавливает human(pause)
-//- (void) pauseLayer {
-//    CFTimeInterval pausedTime = [self.layer convertTime:CACurrentMediaTime() fromLayer:nil];
-//    self.layer.speed = 0.0;
-//    self.layer.timeOffset = pausedTime;
-//}
-
-
-
-
-//    [self pattertnAnimation:animation x:50 y:290 duration:3.f];
-//    [animation setAutoreverses:YES];
-//    [animation setRepeatCount:2];
-//
-//    [CATransaction setCompletionBlock:^{
-////        [timer invalidate];
-//        [CATransaction begin];
-//        CABasicAnimation *animation2 = [CABasicAnimation animationWithKeyPath:@"position"];
-//        [self pattertnAnimation:animation2 x:150 y:100 duration:3.f];
-//
-//        [CATransaction setCompletionBlock:^{
-//            [CATransaction begin];
-//            CABasicAnimation *animation3 = [CABasicAnimation animationWithKeyPath:@"position"];
-//            [self pattertnAnimation:animation3 x:250 y:250 duration:3.f];
-//
-//            [CATransaction setCompletionBlock:^{
-////                [[self timerCheck] invalidate];
-//            }];
-//            [self.layer addAnimation:animation3 forKey:@"anim3"];
-//
-//            [CATransaction commit];
-//        }];
-//        [self.layer addAnimation:animation2 forKey:@"anim2"];
-//
-//        [CATransaction commit];
-//    }];
-//
-//    [self.layer addAnimation:animation forKey:@"anim"];
-//
-//    [CATransaction commit];
-
-
-//- (void) pattertnAnimation:(CABasicAnimation *)animation x:(CGFloat)x y:(CGFloat)y duration:(CFTimeInterval)time {
-//    animation.duration = time;
-//    animation.beginTime = CACurrentMediaTime();
-//    [animation setFromValue:[NSValue valueWithCGPoint:self.layer.position]];
-//    [animation setToValue:[NSValue valueWithCGPoint:CGPointMake(x, y)]];
-//    animation.removedOnCompletion = YES;
-//    animation.fillMode = kCAFillModeBoth;
-//}

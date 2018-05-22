@@ -15,15 +15,17 @@
 @property(weak, nonatomic) Shot *shot;
 //отсдеживает касания по human
 @property(assign, nonatomic) BOOL flagHuman;
-//
+//для получения текущих координат
 @property(weak, nonatomic) NSTimer *timerCheck;
+//подсчет килов
+@property(assign, nonatomic) int counterKill;
 
+@property(assign, nonatomic) BOOL stopTimerBySeconds;
 - (void) startShotAnimatuonWhenTouchHuman:(UITouch *) touch;
 
 - (void) startHumanAnimation;
 - (void) pattertnAnimation:(CABasicAnimation *)animation x:(CGFloat)x y:(CGFloat)y duration:(CFTimeInterval)time;
 
-- (void) killHumanAnimation;
 - (void) anitamationAfterKillHuman;
 
 - (void) pauseLayer;

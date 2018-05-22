@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UIThirdNavigationController : UIViewController
-
+@property(assign, nonatomic) int score;
 @end

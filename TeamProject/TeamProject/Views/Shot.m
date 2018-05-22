@@ -33,7 +33,7 @@
     //каждый раз будет пересет проперти конечной координаты
     [self setEndState:EndPoint];
     //
-    self.durationForMainAnimation = 0.1f;
+    self.durationForMainAnimation = 0.15f;
     //оживляем снаряд
     self.alpha = 1;
     
@@ -61,16 +61,13 @@
     }];
 }
 
-
 - (void)dealloc {
     NSLog(@"shot deallocated");
     [super dealloc];
 }
 
 - (void)drawRect:(CGRect)rect {
-    
     // Drawing code
-    
     self.backgroundColor = [UIColor clearColor];
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextAddEllipseInRect(context, rect);

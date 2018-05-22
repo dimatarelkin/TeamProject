@@ -11,17 +11,11 @@
 #import "Gun.h"
 #import "Human.h"
 
+
 @interface UISecondNavigationController () {
     int seconds;
-    NSTimer* timer;
+    NSTimer *timer;
 }
-@property (weak, nonatomic) UILabel* timerLabel;
-@property (weak, nonatomic) Gun* gunView;
-@property (weak, nonatomic) Human* humanView;
-@property (weak, nonatomic) Shot *shotView;
-
-- (void)addGunAndHumanInRect:(CGRect)rect;
-- (void)startTimerInRect:(CGRect)rect;
 
 @end
 
@@ -78,6 +72,9 @@
 - (void)barButtonItemClick:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
     [timer invalidate];
+    if([_humanView.timerCheck isValid]) {
+        [[_humanView timerCheck] invalidate];
+    }
 }
 
 - (void)startTimerInRect:(CGRect)rect {
@@ -95,13 +92,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //запуск таймера
-//    seconds = 30;
-//    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-//    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-//                                             target:self
-//                                           selector:@selector(timerEnds)
-//                                           userInfo:nil
-//                                            repeats:YES];
+    seconds = 10;
+    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                             target:self
+                                           selector:@selector(timerEnds)
+                                           userInfo:nil
+                                            repeats:YES];
 }
 
 - (void)timerEnds {
@@ -113,6 +110,12 @@
         [self.navigationController pushViewController:tvc animated:true];
         [timer invalidate];
         
+        [_humanView setStopTimerBySeconds:YES];
+        
+        if([_humanView.timerCheck isValid]) {
+            [[_humanView timerCheck] invalidate];
+        }
+        [tvc setScore:_humanView.counterKill];
         //release objects
         [tvc release];
 
@@ -137,20 +140,20 @@
     [_gunView  autorelease];
     
     //Shot init
-    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2, originY, 6, 6)];
-    //сетаем координату shot, где он всегда будет появляться
+    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2 - 6, originY +20, 10, 10)];
     [self.shotView setFirstState:CGPointMake(originX + newWidth / 2, originY)];
     [_shotView setBackgroundColor:[UIColor clearColor]];
+    [_shotView setAlpha:0];
     [self.view addSubview:_shotView];
     
-    
     //Human init
-    
-    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 60, 60)];
+    CGFloat randomY = 150 + arc4random_uniform(100);
+    _humanView = [[Human alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.view.frame) * 1.1, randomY, 85, 40)];
     _humanView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_humanView];
     [_humanView autorelease];
     [_humanView setShot:_shotView];
+    [_humanView setStopTimerBySeconds:NO];
 }
 
 
@@ -167,6 +170,7 @@
     if(_humanView.flagHuman) {
         [_humanView touchesBegan:touches withEvent:event];
         [_humanView.layer removeAllAnimations];
+        [_humanView setCounterKill:0];
     } else {
         //СТАРТУЕМ И УКАЗЫВАЕМ КОНЕЧНУЮ ТОЧКУ ПОЛЁТА
         [_shotView startAnimationShot:myTouchPoint];

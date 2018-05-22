@@ -27,21 +27,13 @@
 
 - (void)drawRect:(CGRect)rect {
     // Drawing the gun
-//    NSLog(@"Gun frame %@",NSStringFromCGRect(_drawingGunSpace));
-
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGContextBeginPath(context);
-    
-  
-    
-    
     CGFloat centerX = CGRectGetMidX(rect);
     CGFloat centerY = CGRectGetMinY(rect);
     //!!!Координата, где всегда будет появляться shot!!! (firstState та же _shotStartPoint)
     _shotStartPoint = CGPointMake(centerX - 8, centerY); // минус половина толщины снаряда, если у снаряда width - 10, то минус 5
-//    //???
-//    _shotStartPoint = _shot.firstState;
 
     //constraionts
     CGFloat deltaX = 7;                        //можно менять размер пушки

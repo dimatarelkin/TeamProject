@@ -61,7 +61,7 @@
     [self.view addSubview: resultLabel];
     
     //score number label
-    int score = 10;
+    int score = _score;
     UILabel *scoreNumberLabel = [[UILabel alloc] initWithFrame:rectForScoreNumber];
     NSString* scoreNum = [NSString stringWithFormat:@"%i",score];
     [scoreNumberLabel setText:scoreNum];
