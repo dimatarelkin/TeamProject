@@ -105,12 +105,14 @@
     [rightButton addTarget:self action:@selector(barButtonItemClick:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *myButton = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
     
+    
+    
     [self.navigationItem setRightBarButtonItem:myButton];
+    
     
     //releasing objects
     [rightButton release];
     
-
 }
 
 #pragma mark - Appearing methods

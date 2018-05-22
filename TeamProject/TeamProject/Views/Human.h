@@ -13,8 +13,6 @@
 @property(assign, nonatomic) CGRect drawHumanSpace;
 //нужно, чтобы вызвать в методе Human вызвать метода Shot(Touches begin и запустить анимацию)
 @property(weak, nonatomic) Shot *shot;
-//отсдеживает касания по human
-@property(assign, nonatomic) BOOL flagHuman;
 //для получения текущих координат
 @property(weak, nonatomic) NSTimer *timerCheck;
 //подсчет килов

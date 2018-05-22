@@ -39,7 +39,7 @@
     CABasicAnimation *myAnymation = [CABasicAnimation animationWithKeyPath:@"position"];
     [myAnymation setDuration:_durationForMainAnimation];
     [myAnymation setFromValue:[NSValue valueWithCGPoint:CGPointMake(_firstState.x, _firstState.y)]];
-    [myAnymation setToValue:[NSValue valueWithCGPoint:CGPointMake(EndPoint.x,EndPoint.y)]];//self.layer.position.x(были раньше)
+    [myAnymation setToValue:[NSValue valueWithCGPoint:CGPointMake(EndPoint.x,EndPoint.y)]];
     [CATransaction setCompletionBlock:^{
         NSLog(@"END OF ANIMATION!!!");
          //делаем пересет координат по завершении анимации
@@ -65,7 +65,6 @@
     CGContextAddEllipseInRect(context, rect);
     CGContextSetFillColorWithColor(context, [UIColor blackColor].CGColor);
     CGContextDrawPath(context, kCGPathFillStroke);
-    
 }
 
 - (void)dealloc {

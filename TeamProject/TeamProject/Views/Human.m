@@ -24,7 +24,6 @@
     
     //сравнение, попадает ли снаряд в цель
     if(CGRectContainsPoint(self.layer.presentationLayer.frame, _shot.endState)) {
-        _flagHuman = YES;
         [self performSelector:@selector(removeAnim) withObject:nil afterDelay:([_shot durationForMainAnimation] + 0.1f)];
         //      //начинаем анамацию с задержкой
         [self performSelector:@selector(moveView:) withObject:self afterDelay:([_shot durationForMainAnimation])];
@@ -43,28 +42,25 @@
 - (void) startShotAnimatuonWhenTouchHuman:(UITouch *) touch {
     CGPoint pointOfTouch = [touch locationInView:touch.view];
     CGPoint convertedInSuperview = [self convertPoint:pointOfTouch toView:self.superview];
-    [_shot startAnimationShot:convertedInSuperview];
+    [self.shot startAnimationShot:convertedInSuperview];
 }
 
 
 //анимация killHuman
 - (void)moveView:(UIView*) view {
     self.counterKill += 1;
-    NSLog(@"counterKill = %i", _counterKill);
+    NSLog(@"counterKill = %i", self.counterKill);
     [UIView animateWithDuration:1
                           delay:0
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          //animation start
                          CGFloat randY = self.superview.frame.size.height * 0.3 + arc4random_uniform(rand()%200);
-                         
-//                         view.center = CGPointMake(CGRectGetWidth(view.bounds) - CGRectGetWidth(view.frame)/2, 150);
                          view.center = CGPointMake(CGRectGetWidth(view.bounds), randY);
 
                          //changing color when view in change position
-                         view.backgroundColor = [UIColor clearColor];             // [self randomColor];
-                         NSLog(@"%@", NSStringFromCGPoint(view.center));
-                         
+                         view.backgroundColor = [UIColor clearColor];
+
                          //all transforms at the same time
                          CGAffineTransform scale = CGAffineTransformMakeScale(0.00001,0.00001);
                          CGAffineTransform rotation = CGAffineTransformMakeRotation(M_PI);
@@ -85,32 +81,31 @@
                          
                          //transform
                          view.transform = scale;
-                        [_timerCheck invalidate];
+                        [self.timerCheck invalidate];
                         [self startHumanAnimation];
                      }];
+    
     NSLog(@"MOVE VIew ENDED");
-    [_timerCheck invalidate];
+    [self.timerCheck invalidate];
 }
 
 - (void) invalidatingTimer {
-    [_timerCheck invalidate];
+    [self.timerCheck invalidate];
     NSLog(@"INVALIDATED TIMER");
 }
 
 - (void) startHumanAnimation {
-    
-    if(!_stopTimerBySeconds) {
+    if(!self.stopTimerBySeconds) {
         [CATransaction begin];
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"position"];
-        animation.duration = 1.f;
+        animation.duration = 3.f;
         [animation setFromValue:[NSValue valueWithCGPoint:CGPointMake(self.superview.frame.size.width,
                                                                       self.layer.position.y)]];
         [animation setToValue:[NSValue valueWithCGPoint:CGPointMake(-(self.layer.frame.size.width), self.layer.position.y)]];
         animation.fillMode = kCAFillModeBoth;
         
-        _timerCheck = [NSTimer scheduledTimerWithTimeInterval:0.1f repeats:YES block:^(NSTimer * _Nonnull timer) {
+        self.timerCheck = [NSTimer scheduledTimerWithTimeInterval:0.1f repeats:YES block:^(NSTimer * _Nonnull timer) {
             [self.layer setPosition:self.layer.presentationLayer.position];
-            NSLog(@"%@", NSStringFromCGPoint(self.layer.presentationLayer.position));
         }];
         [animation setRepeatCount:INFINITY];
         [self.layer addAnimation:animation forKey:@"anim"];
@@ -127,6 +122,8 @@
     [myLayer setContents:(id)[UIImage imageNamed:@"playingJet"].CGImage];
     myLayer.contentsGravity = kCAGravityResizeAspect;
     [self.layer addSublayer:myLayer];
+    
+    //releasing layer
     [myLayer release];
     
 }

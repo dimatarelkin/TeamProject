@@ -73,28 +73,28 @@
 - (void)barButtonItemClick:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
     [timer invalidate];
-    if([_humanView.timerCheck isValid]) {
-        [[_humanView timerCheck] invalidate];
+    if([self.humanView.timerCheck isValid]) {
+        [[self.humanView timerCheck] invalidate];
     }
 }
 
 - (void)startTimerInRect:(CGRect)rect {
     //отрисовка таймера из viewDidLoad
-    _timerLabel = [[UILabel alloc] initWithFrame:rect];
-    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-    [_timerLabel setFont:[UIFont fontWithName:@"AvenirNext-Heavy" size:40]];
-    _timerLabel.backgroundColor = [UIColor clearColor];
-    _timerLabel.textColor = [UIColor blackColor];
-    [_timerLabel setTextAlignment:NSTextAlignmentCenter];
-    [_timerLabel setAdjustsFontSizeToFitWidth:YES];
-    [self.view addSubview:_timerLabel];
+    self.timerLabel = [[UILabel alloc] initWithFrame:rect];
+    [self.timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+    [self.timerLabel setFont:[UIFont fontWithName:@"AvenirNext-Heavy" size:40]];
+    self.timerLabel.backgroundColor = [UIColor clearColor];
+    self.timerLabel.textColor = [UIColor blackColor];
+    [self.timerLabel setTextAlignment:NSTextAlignmentCenter];
+    [self.timerLabel setAdjustsFontSizeToFitWidth:YES];
+    [self.view addSubview:self.timerLabel];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //запуск таймера
     seconds = 10;
-    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+    [self.timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
     timer = [NSTimer scheduledTimerWithTimeInterval:1.0
                                              target:self
                                            selector:@selector(timerEnds)
@@ -111,18 +111,18 @@
         [self.navigationController pushViewController:tvc animated:true];
         [timer invalidate];
         
-        [_humanView setStopTimerBySeconds:YES];
+        [self.humanView setStopTimerBySeconds:YES];
         
-        if([_humanView.timerCheck isValid]) {
-            [[_humanView timerCheck] invalidate];
+        if([self.humanView.timerCheck isValid]) {
+            [[self.humanView timerCheck] invalidate];
         }
-        [tvc setScore:_humanView.counterKill];
+        [tvc setScore:self.humanView.counterKill];
         //release objects
         [tvc release];
 
     } else {
         seconds -=1;
-        _timerLabel.text = [NSString stringWithFormat:@"Time: %d", seconds];
+        self.timerLabel.text = [NSString stringWithFormat:@"Time: %d", seconds];
     }
 }
 
@@ -135,27 +135,27 @@
     NSLog(@"%f,%f,%f,%f", newHeight, newWidth,originX,originY);
     
     // Gun init
-    _gunView = [[Gun alloc] initWithFrame:CGRectMake(originX, originY, newWidth, newHeight)];
-    _gunView.backgroundColor = [UIColor clearColor];
-    [self.view addSubview:_gunView];
-    [_gunView  autorelease];
+    self.gunView = [[Gun alloc] initWithFrame:CGRectMake(originX, originY, newWidth, newHeight)];
+    self.gunView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:self.gunView];
+    [self.gunView  autorelease];
     
     //Shot init
-    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2, originY, 10, 10)];
+    self.shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2, originY, 12, 12)];
     [self.shotView setFirstState:CGPointMake(originX + newWidth / 2, originY)];
-    [_shotView setBackgroundColor:[UIColor clearColor]];
-    [_shotView setAlpha:0];
-    [self.view addSubview:_shotView];
+    [self.shotView setBackgroundColor:[UIColor clearColor]];
+    [self.shotView setAlpha:0];
+    [self.view addSubview:self.shotView];
     [self.shotView release];
     
     //Human init
     CGFloat randomY = 150 + arc4random_uniform(100);
-    _humanView = [[Human alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.view.frame) * 1.1, randomY, 85, 40)];
-    _humanView.backgroundColor = [UIColor clearColor];
+    self.humanView = [[Human alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.view.frame) * 1.1, randomY, 85, 40)];
+    self.humanView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_humanView];
-    [_humanView autorelease];
-    [_humanView setShot:_shotView];
-    [_humanView setStopTimerBySeconds:NO];
+    [self.humanView autorelease];
+    [self.humanView setShot:_shotView];
+    [self.humanView setStopTimerBySeconds:NO];
 }
 
 
@@ -165,20 +165,10 @@
 - (void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     UITouch *myTouch = [[event allTouches] anyObject];
     CGPoint myTouchPoint = [myTouch locationInView:myTouch.view];
-    
-    [_humanView setFlagHuman:NO];
-    
-    //Елси нажимаем на врага
-    if(_humanView.flagHuman) {
-        [_humanView touchesBegan:touches withEvent:event];
-        [_humanView.layer removeAllAnimations];
-        [_humanView setCounterKill:0];
-    } else {
-        //СТАРТУЕМ И УКАЗЫВАЕМ КОНЕЧНУЮ ТОЧКУ ПОЛЁТА
-        [_shotView startAnimationShot:myTouchPoint];
-    }
-//    NSLog(@"TOUCHED VC %@", NSStringFromCGPoint(CGPointMake(myTouchPoint.x, myTouchPoint.y)));
-    NSLog(@"%@", NSStringFromCGPoint(_humanView.layer.presentationLayer.position));
+
+    //СТАРТУЕМ И УКАЗЫВАЕМ КОНЕЧНУЮ ТОЧКУ ПОЛЁТА
+    [self.shotView startAnimationShot:myTouchPoint];
+    NSLog(@"%@", NSStringFromCGPoint(self.humanView.layer.presentationLayer.position));
 }
 
 
