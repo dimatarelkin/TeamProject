@@ -28,5 +28,5 @@
 
 - (void) pauseLayer;
 - (void) invalidatingTimer;
-
+- (void) removeAnim;
 @end

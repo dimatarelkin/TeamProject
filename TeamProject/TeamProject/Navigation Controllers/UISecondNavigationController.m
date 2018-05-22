@@ -69,37 +69,10 @@
     //timer label
     [self startTimerInRect:rectForTimer];
     
-///<<<<<<< HEAD
     //releasing objects
     [backButton release];
-//=======
-//    [CATransaction begin];
-//    CABasicAnimation *start = [CABasicAnimation animationWithKeyPath:@"position.x"];
-//    [start setFromValue:[NSNumber numberWithFloat:_humanView.layer.position.x]];
-//    [start setToValue:[NSNumber numberWithFloat:50]];
-//    [start setDuration:3.f];
-////    [start setRepeatCount:INFINITY];
-//
-//
-//    [CATransaction setCompletionBlock:^{
-//        NSLog(@"COMPLETE");
-////        [_humanView.layer removeAnimationForKey:@"startAnimation"];
-//        [_humanView.layer setPosition:CGPointMake(50, [_humanView.layer presentationLayer].position.x)];
-//        [_humanView.layer removeAnimationForKey:@"startAnimation"];
-//        CABasicAnimation *reverce = [CABasicAnimation animationWithKeyPath:@"position.x"];
-//        [reverce setFromValue:[NSNumber numberWithFloat:50]];
-//        [reverce setToValue:[NSNumber numberWithFloat:300]];
-//        [reverce setDuration:3.f];
-//        [_humanView.layer addAnimation:start forKey:@"reverceAnimation"];
-//    }];
-//    [_humanView.layer addAnimation:start forKey:@"startAnimation"];
     
     [self.humanView startHumanAnimation];
-    
-    
-    
-//>>>>>>> localAnimation22
-    
 }
 
 - (void)barButtonItemClick:(id)sender {
@@ -122,13 +95,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     //запуск таймера
-    seconds = 3;
-    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                             target:self
-                                           selector:@selector(timerEnds)
-                                           userInfo:nil
-                                            repeats:YES];
+//    seconds = 30;
+//    [_timerLabel setText:[NSString stringWithFormat:@"Time: %d", seconds]];
+//    timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+//                                             target:self
+//                                           selector:@selector(timerEnds)
+//                                           userInfo:nil
+//                                            repeats:YES];
 }
 
 - (void)timerEnds {
@@ -173,7 +146,7 @@
     
     //Human init
     
-    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 100, 100)];
+    _humanView = [[Human alloc] initWithFrame:CGRectMake(200, 200, 60, 60)];
     _humanView.backgroundColor = [UIColor clearColor];
     [self.view addSubview:_humanView];
     [_humanView autorelease];

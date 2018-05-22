@@ -33,7 +33,7 @@
     //каждый раз будет пересет проперти конечной координаты
     [self setEndState:EndPoint];
     //
-    self.durationForMainAnimation = 0.5f;
+    self.durationForMainAnimation = 0.1f;
     //оживляем снаряд
     self.alpha = 1;
     
