@@ -56,7 +56,10 @@
                         options:UIViewAnimationOptionCurveLinear
                      animations:^{
                          //animation start
-                         view.center = CGPointMake(CGRectGetWidth(view.bounds) - CGRectGetWidth(view.frame)/2, 150);
+                         CGFloat randY = self.superview.frame.size.height * 0.3 + arc4random_uniform(rand()%200);
+                         
+//                         view.center = CGPointMake(CGRectGetWidth(view.bounds) - CGRectGetWidth(view.frame)/2, 150);
+                         view.center = CGPointMake(CGRectGetWidth(view.bounds), randY);
 
                          //changing color when view in change position
                          view.backgroundColor = [UIColor clearColor];             // [self randomColor];

@@ -13,7 +13,6 @@
 		3216B24820AB76A0000965B8 /* UIFirstNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B24720AB76A0000965B8 /* UIFirstNavigationController.m */; };
 		3216B24B20AB76CB000965B8 /* UISecondNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B24A20AB76CB000965B8 /* UISecondNavigationController.m */; };
 		3216B24E20AB76FD000965B8 /* UIThirdNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B24D20AB76FD000965B8 /* UIThirdNavigationController.m */; };
-		3216B25220AC2A88000965B8 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25120AC2A88000965B8 /* Game.m */; };
 		3216B25520AC3D11000965B8 /* Gun.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25420AC3D11000965B8 /* Gun.m */; };
 		3216B25820AC3D91000965B8 /* Human.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25720AC3D91000965B8 /* Human.m */; };
 		3216B25B20AC3DA5000965B8 /* Shot.m in Sources */ = {isa = PBXBuildFile; fileRef = 3216B25A20AC3DA5000965B8 /* Shot.m */; };
@@ -33,8 +32,6 @@
 		3216B24A20AB76CB000965B8 /* UISecondNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UISecondNavigationController.m; sourceTree = "<group>"; };
 		3216B24C20AB76FD000965B8 /* UIThirdNavigationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UIThirdNavigationController.h; sourceTree = "<group>"; };
 		3216B24D20AB76FD000965B8 /* UIThirdNavigationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UIThirdNavigationController.m; sourceTree = "<group>"; };
-		3216B25020AC2A88000965B8 /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
-		3216B25120AC2A88000965B8 /* Game.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		3216B25320AC3D11000965B8 /* Gun.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Gun.h; sourceTree = "<group>"; };
 		3216B25420AC3D11000965B8 /* Gun.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Gun.m; sourceTree = "<group>"; };
 		3216B25620AC3D91000965B8 /* Human.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Human.h; sourceTree = "<group>"; };
@@ -74,7 +71,6 @@
 		3216B22F20AB757F000965B8 /* TeamProject */ = {
 			isa = PBXGroup;
 			children = (
-				3216B25D20AC3E13000965B8 /* Game */,
 				3216B25C20AC3DFC000965B8 /* Views */,
 				3216B24F20AB770D000965B8 /* Navigation Controllers */,
 				3216B23020AB757F000965B8 /* AppDelegate.h */,
@@ -111,15 +107,6 @@
 				3216B25A20AC3DA5000965B8 /* Shot.m */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		3216B25D20AC3E13000965B8 /* Game */ = {
-			isa = PBXGroup;
-			children = (
-				3216B25020AC2A88000965B8 /* Game.h */,
-				3216B25120AC2A88000965B8 /* Game.m */,
-			);
-			path = Game;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -197,7 +184,6 @@
 				3216B24E20AB76FD000965B8 /* UIThirdNavigationController.m in Sources */,
 				3216B25820AC3D91000965B8 /* Human.m in Sources */,
 				3216B25B20AC3DA5000965B8 /* Shot.m in Sources */,
-				3216B25220AC2A88000965B8 /* Game.m in Sources */,
 				3216B25520AC3D11000965B8 /* Gun.m in Sources */,
 				3216B23220AB7580000965B8 /* AppDelegate.m in Sources */,
 				3216B24B20AB76CB000965B8 /* UISecondNavigationController.m in Sources */,

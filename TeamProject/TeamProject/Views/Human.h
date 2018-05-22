@@ -19,8 +19,9 @@
 @property(weak, nonatomic) NSTimer *timerCheck;
 //подсчет килов
 @property(assign, nonatomic) int counterKill;
-
+//остановка внутреннего таймера аниации
 @property(assign, nonatomic) BOOL stopTimerBySeconds;
+
 - (void) startShotAnimatuonWhenTouchHuman:(UITouch *) touch;
 - (void) startHumanAnimation;
 - (void) invalidatingTimer;

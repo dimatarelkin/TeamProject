@@ -141,7 +141,7 @@
     [_gunView  autorelease];
     
     //Shot init
-    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2 - 6, originY +20, 10, 10)];
+    _shotView = [[Shot alloc] initWithFrame:CGRectMake(originX + newWidth / 2, originY, 10, 10)];
     [self.shotView setFirstState:CGPointMake(originX + newWidth / 2, originY)];
     [_shotView setBackgroundColor:[UIColor clearColor]];
     [_shotView setAlpha:0];
