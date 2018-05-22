@@ -22,9 +22,7 @@
     //ТУТ УКАЗЫВАЕМ КОНЕЧНУЮ ТОЧКУ
     [self startAnimationShot:pointOfTouch];
 }
-
 - (void) touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
-
 - (void) touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {}
 
 
@@ -36,7 +34,6 @@
     self.durationForMainAnimation = 0.15f;
     //оживляем снаряд
     self.alpha = 1;
-    
     //анимация
     [CATransaction begin];
     CABasicAnimation *myAnymation = [CABasicAnimation animationWithKeyPath:@"position"];
@@ -61,11 +58,6 @@
     }];
 }
 
-- (void)dealloc {
-    NSLog(@"shot deallocated");
-    [super dealloc];
-}
-
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     self.backgroundColor = [UIColor clearColor];
@@ -76,5 +68,9 @@
     
 }
 
+- (void)dealloc {
+    NSLog(@"shot deallocated");
+    [super dealloc];
+}
 
 @end

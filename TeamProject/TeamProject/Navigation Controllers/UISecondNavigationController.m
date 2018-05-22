@@ -42,6 +42,7 @@
     [backButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [backButton setTitleColor:[[UIColor purpleColor] colorWithAlphaComponent:0.5] forState:UIControlStateHighlighted];
     [backButton addTarget:self action:@selector(barButtonItemClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     [self.navigationItem setLeftBarButtonItem:leftButton];
 
@@ -145,6 +146,7 @@
     [_shotView setBackgroundColor:[UIColor clearColor]];
     [_shotView setAlpha:0];
     [self.view addSubview:_shotView];
+    [self.shotView release];
     
     //Human init
     CGFloat randomY = 150 + arc4random_uniform(100);
@@ -208,7 +210,7 @@
 */
 
 - (void)dealloc {
-    //    NSLog(@"NAV2 | dealloc");
+    NSLog(@"NAV2 | dealloc");
     [super dealloc];
     
 }

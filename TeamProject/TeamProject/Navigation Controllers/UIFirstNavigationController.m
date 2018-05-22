@@ -109,6 +109,7 @@
     
     //releasing objects
     [rightButton release];
+    
 
 }
 

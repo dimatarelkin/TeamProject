@@ -22,13 +22,7 @@
 
 @property(assign, nonatomic) BOOL stopTimerBySeconds;
 - (void) startShotAnimatuonWhenTouchHuman:(UITouch *) touch;
-
 - (void) startHumanAnimation;
-- (void) pattertnAnimation:(CABasicAnimation *)animation x:(CGFloat)x y:(CGFloat)y duration:(CFTimeInterval)time;
-
-- (void) anitamationAfterKillHuman;
-
-- (void) pauseLayer;
 - (void) invalidatingTimer;
 - (void) removeAnim;
 @end

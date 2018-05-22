@@ -91,7 +91,6 @@
     [backToMenuButton release];
     [resultLabel release];
     [scoreNumberLabel release];
-    [scoreNum release];
     [plainLayer release];
 }
 
